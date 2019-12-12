@@ -2,9 +2,11 @@ package com.wsy.testuiapplication.kotlin
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.wsy.testuiapplication.R
 import com.wsy.testuiapplication.kotlin.bean.ForcastBean
+import kotlinx.android.synthetic.main.activity_kotlin_api.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
@@ -22,7 +24,9 @@ class KotlinAPIActivity : AppCompatActivity() {
         setContentView(R.layout.activity_kotlin_api)
 
 //        getDataFromAPI()
-
+        rv.layoutManager = LinearLayoutManager(this)
+        //todo
+//        rv.adapter = ForecastListAdapter(this,)
         getDataFromAPItoGson()
     }
 
