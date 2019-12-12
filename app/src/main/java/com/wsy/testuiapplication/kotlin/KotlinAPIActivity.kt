@@ -53,8 +53,12 @@ class KotlinAPIActivity : AppCompatActivity() {
 
             val cityCode = "London,uk"
             var result: ForcastBean = ForcastRequest(cityCode).run()
-
             Log.d(TAG, result.name + "\n" + result.cod)
+
+            uiThread {
+
+            }
+
         }
     }
 
