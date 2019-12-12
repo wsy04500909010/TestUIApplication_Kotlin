@@ -61,7 +61,6 @@ class KotlinMainActivity : AppCompatActivity() {
             }
 
         })
-
         //这里使用对Animal类的扩展参数
         Animal("喵喵").newFunction("newFunctionText")
     }
