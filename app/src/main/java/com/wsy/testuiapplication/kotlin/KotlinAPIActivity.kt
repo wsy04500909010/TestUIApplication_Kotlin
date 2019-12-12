@@ -30,7 +30,7 @@ class KotlinAPIActivity : AppCompatActivity() {
 
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = ForecastListAdapter(this, forecastList, object : ForecastListAdapter.OnItemClickListener {
-            override fun click(forecast: ModelBean) {
+            override fun invoke(forecast: ModelBean) {
                 Log.d(TAG, forecast.cityName + "===" + forecast.high + "===" + forecast.low)
             }
 

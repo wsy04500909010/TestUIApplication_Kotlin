@@ -14,7 +14,7 @@ class ForecastListAdapter(val context: Context, val items: List<ForcastBean>, va
     : RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
-        fun click(forecast: ForcastBean)
+        operator fun invoke(forecast: ForcastBean)
     }
 
 
@@ -52,7 +52,7 @@ class ForecastListAdapter(val context: Context, val items: List<ForcastBean>, va
             high?.text = forecast.high.toString()
             low?.text = forecast.low.toString()
             itemView.setOnClickListener {
-                listener?.click(forecast)
+                listener?.invoke(forecast)
             }
         }
 
