@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_layout_height"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!--<View-->
+        <!--android:id="@+id/line_signup"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1px"-->
+        <!--android:background="@color/color_666666" />-->
+
+        <ImageView
+            android:id="@+id/logo_ad_signup"
+            android:layout_width="@dimen/iv_logo_in_signup_width"
+            android:layout_height="@dimen/iv_logo_in_signup_height"
+            android:layout_marginTop="@dimen/tv_signin_tip_margin_top"
+            android:scaleType="centerInside"
+            android:src="@drawable/log_in_logo"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/layout_clause"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tip_signup1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tip_signup1"
+                android:textColor="@color/color_666666"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/tip_signup2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tip_signup2"
+                android:textColor="@color/color_signuptip"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tv_signin_tip_margin_top"
+            android:text="@string/skip"
+            android:textColor="@color/color_dark"
+            android:textSize="@dimen/size_tv_signup_skip" />
+
+        <TextView
+            android:id="@+id/tv_login_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tv_signin_tip_margin_top"
+            android:text="@string/signin_tip"
+            android:textColor="@color/color_dark"
+            android:textSize="@dimen/size_tv_signup_tip" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_webview_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_signup"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="@dimen/webview_layout_margin_bottom">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_webview_cover_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_signup"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="@dimen/webview_layout_margin_bottom">
+
+        <View
+            android:id="@+id/view_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <ProgressBar
+            android:id="@+id/signup_loading_pb"
+            android:layout_width="@dimen/progressbar_width"
+            android:layout_height="@dimen/progressbar_height"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/title_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tv_signup_title_margin_top"
+        android:text="@string/signup_free"
+        android:textColor="@color/color_333333"
+        android:textSize="@dimen/size_tv_signup_title" />
+
+    <TextView
+        android:id="@+id/title_logintext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/title_signup"
+        android:layout_alignBottom="@id/title_signup"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/iv_close_signup_margin_right"
+        android:text="@string/signin"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/size_tv_signup_title" />
+
+    <ImageView
+        android:id="@+id/iv_back_signup"
+        android:layout_width="@dimen/iv_back_signup_width"
+        android:layout_height="@dimen/iv_back_signup_height"
+        android:layout_alignTop="@id/title_signup"
+        android:layout_alignBottom="@id/title_signup"
+        android:layout_marginLeft="@dimen/iv_back_signup_margin_top"
+        android:src="@drawable/top_back"
+        android:tint="@color/color_666666" />
+
+</RelativeLayout>

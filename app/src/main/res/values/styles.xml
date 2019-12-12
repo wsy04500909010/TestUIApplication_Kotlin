@@ -1,0 +1,20 @@
+<resources>
+
+    <!--&lt;!&ndash; Base application theme. &ndash;&gt;-->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+    <!--</style>-->
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!-- AppCompatEditText默认状态状态设置底线颜色 -->
+        <item name="colorControlNormal">@android:color/darker_gray</item>
+        <!-- AppCompatEditText选择的底线颜色 -->
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
+</resources>

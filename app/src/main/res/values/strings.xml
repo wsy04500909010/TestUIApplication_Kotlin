@@ -1,0 +1,419 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">iTalkBB TV</string>
+
+    <string name="copyright">Copyright © iTalkBB.com All rights reserved</string>
+    <string name="tip_login1">iTalkBB 任意产品用户可使用原账号密码直接登录</string>
+    <string name="tip_login2">您也可以使用常用邮箱注册新账户，获取个性化内容推荐。每个账户只支持同时使用一个用户端进行观看。</string>
+    <string name="tip_signup1">继续代表已同意</string>
+    <string name="tip_signup2">《iTalkBB 服务条款》</string>
+    <string name="login_forgetpsd">忘记密码</string>
+    <string name="tip_goto_login1">已注册用户</string>
+    <string name="tip_goto_login2">点击登录</string>
+    <string name="tip_authorization">是否信任该网站的证书</string>
+
+    <string name="auto_login_failed">自动登录失败,请手动登录</string>
+    <string name="signup_free">免费注册</string>
+    <string name="signin_tip">温馨提示：iTalkBB 用户可直接登录</string>
+    <string name="signin">登录</string>
+    <string name="skip">跳过注册</string>
+
+
+    <string name="recommend">推荐</string>
+    <string name="home">首页</string>
+    <string name="drama">剧集</string>
+    <string name="zype_drama">电视剧</string>
+    <string name="zype_america">北美</string>
+    <string name="zype_carton">动画</string>
+    <string name="variety">综艺</string>
+    <string name="live">直播</string>
+    <string name="audio">曲艺杂谈</string>
+    <string name="film">电影</string>
+    <string name="news">新闻</string>
+    <string name="special">专题</string>
+    <string name="voice">音频</string>
+
+    <!--secondary category-->
+    <string name="hot">热门</string>
+
+    <string name="play">播放</string>
+    <string name="collect">收藏</string>
+    <string name="collect_success">已收藏</string>
+    <string name="cancel_collect_success">已取消收藏</string>
+    <string name="cancel_collect_fail">取消收藏失败</string>
+    <string name="collect_fail">收藏失败</string>
+    <string name="all">全部</string>
+    <string name="close">X</string>
+    <string name="retry">重试</string>
+    <string name="back">返回</string>
+    <string name="exit">退出</string>
+    <string name="loading">加载中</string>
+
+    <!-- error tips -->
+    <string name="network_disconnected">网络连接失败，请检查网络状况</string>
+    <string name="network_disconnected_video_tips">网络连接失败，视频无法加载</string>
+    <string name="network_abnormal">当前网络不畅，请检查网络</string>
+    <string name="request_data_failed">数据加载失败，请稍候再试</string>
+    <string name="search_no_result">很抱歉，没有搜索到相关内容</string>
+    <string name="search_no_result_part1">很抱歉，没有搜索到与</string>
+    <string name="search_no_result_part2">相关的内容</string>
+    <string name="off_shelf">抱歉，该视频不存在，请尝试观看其他内容</string>
+    <string name="network_error">当前无网络</string>
+    <string name="click_to_retry">点击重新加载</string>
+
+    <!--launcher-->
+    <string name="launcher_skip_ad">跳过广告</string>
+    <string name="launcher_copyright">Copyright © iTalkBB.com All rights reserved</string>
+
+    <!--Main Page-->
+    <string name="main_btn_home">首页</string>
+    <string name="main_btn_user">我的</string>
+    <string name="exit_app_tips">再按一次返回键退出</string>
+    <string name="home_card_group_change">换一换</string>
+    <string name="home_card_group_more">更多</string>
+    <string name="main_recent_play_toast">观看至</string>
+    <string name="main_banner_category">活动</string>
+
+    <!--Search Page-->
+    <string name="search_type">类型:</string>
+    <string name="search_date">年份:</string>
+    <string name="search_director">导演:</string>
+    <string name="search_actor">主演:</string>
+    <string name="search_presider">主持人:</string>
+    <string name="search_related">的相关</string>
+
+    <!--Play Page-->
+    <string name="play_default_time">00:00</string>
+    <string name="play_definition_low">极速</string>
+    <string name="play_definition_medium">流畅</string>
+    <string name="play_definition_high">高清</string>
+    <string name="play_first_tips_sound">调节音量</string>
+    <string name="play_first_tips_brightness">调节明暗</string>
+    <string name="play_series">选集</string>
+    <string name="play_detail_category">类型:</string>
+    <string name="play_detail_actor">主演:</string>
+    <string name="play_detail_director">导演:</string>
+    <string name="play_detail_release_date">上映日期:</string>
+    <string name="play_detail_presider">主持人:</string>
+    <string name="play_detail_mc">主播:</string>
+    <string name="play_detail_intro">简介:</string>
+    <string name="play_update_to">更新至</string>
+    <string name="play_episode">集</string>
+    <string name="play_all">全部</string>
+    <string name="play_playing_tag">正在播放</string>
+    <string name="play_program_list">回看列表</string>
+    <string name="play_channel_list">直播列表</string>
+    <string name="play_the_day_before_yesterday">前天</string>
+    <string name="play_yesterday">昨天</string>
+    <string name="play_today">今天</string>
+    <string name="play_vod">正在回看</string>
+    <string name="play_program_empty">该频道无法提供回看内容</string>
+    <string name="play_back_to_live">回到直播</string>
+    <string name="play_continue">继续观看</string>
+    <string name="play_continue_to_play">继续播放</string>
+    <string name="play_continue_tips_last">上次播放至</string>
+    <string name="play_tips_network_poor">  当前网络环境不佳  </string>
+    <string name="play_tips_network_switch_sd">  当前网络环境不佳，建议切换为极速模式观看  </string>
+    <string name="play_tips_player_error">网络出错或其他原因导致\n无法播放，请返回重试</string>
+    <string name="play_tips_using_carrier">当前正使用运营商流量播放，将可能\n会产生流量费，是否继续观看？</string>
+    <string name="play_series_prefix">第</string>
+    <string name="play_series_suffix">集</string>
+    <string name="play_share_slogan">iTalkBBTV海外看视频高清免费无广告</string>
+    <string name="play_more_detail_open">展开</string>
+    <string name="play_more_detail_close">收起</string>
+
+    <!-- Search bar widget -->
+    <string name="search_bar_default">片名、演员名字等</string>
+    <string name="search_exit">返回</string>
+    <string name="search_history">历史搜索</string>
+    <string name="search_clear">清空历史</string>
+    <string name="search_hot">热门搜索</string>
+
+    <!-- refresh widget -->
+    <string name="refresh_widget_no_more_data">已经到底啦~</string>
+    <string name="pushmsg_center_no_more_msg">已经是最后一条内容了</string>
+    <string name="pushmsg_center_pull_up_text">释放更新</string>
+    <string name="pushmsg_center_pull_down_text">下拉刷新</string>
+    <string name="pushmsg_center_pull_release_text">松开获取更多</string>
+    <string name="pushmsg_center_pull_down_update_time">最后更新时间 : </string>
+    <string name="pushmsg_center_load_more_ongoing_text">数据加载中..</string>
+    <string name="xsearch_loading">正在加载中…</string>
+    <!-- 加载图片失败时的提示文本 -->
+    <string name="picture_load_image_failed">点击屏幕，重新加载</string>
+    <!-- 加载中提示 -->
+    <string name="picture_image_loading">正在加载…</string>
+    <!-- 下拉刷新和上拉加载更多的文本 -->
+    <string name="pull_to_refresh_header_hint_normal">@string/pushmsg_center_pull_down_text</string>
+    <string name="pull_to_refresh_header_hint_normal2">上拉可以刷新</string>
+    <string name="pull_to_refresh_header_hint_ready">释放更新</string>
+    <string name="pull_to_refresh_header_hint_loading">@string/pushmsg_center_load_more_ongoing_text</string>
+    <string name="pull_to_refresh_header_last_time">@string/pushmsg_center_pull_down_update_time</string>
+    <string name="pull_to_refresh_footer_hint_ready">松开载入更多</string>
+    <string name="pull_to_refresh_refreshing_label">@string/pull_to_refresh_header_hint_loading</string>
+    <string name="pull_to_refresh_no_more_data">@string/pushmsg_center_no_more_msg</string>
+    <string name="pull_to_refresh_network_error">网络不给力，请检查网络</string>
+
+
+    <string name="pref_title_general">General</string>
+
+    <string name="pref_key_enable_background_play">pref.enable_background_play</string>
+    <string name="pref_title_enable_background_play">Enable background play</string>
+    <string name="pref_summary_enable_background_play">need Android 4.0+</string>
+
+    <string name="pref_key_using_android_player">pref.using_android_player</string>
+    <string name="pref_title_using_android_player">Using system player</string>
+    <string name="pref_summary_using_android_player"></string>
+
+    <string name="pref_key_player">pref.player</string>
+    <string name="pref_title_player">Choose Player</string>
+    <string-array name="pref_entries_player">
+        <item>Auto Select</item>
+        <item>AndroidMediaPlayer</item>
+        <item>IjkMediaPlayer</item>
+        <item>IjkExoMediaPlayer</item>
+    </string-array>
+    <string-array name="pref_entry_values_player">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="pref_entry_summaries_player">
+        <item>Auto Select</item>
+        <item>AndroidMediaPlayer</item>
+        <item>IjkMediaPlayer</item>
+        <item>IjkExoMediaPlayer</item>
+    </string-array>
+
+    <!-- IjkPlayer -->
+    <string name="pref_title_ijkplayer_video">Video: ijkplayer</string>
+
+    <string name="pref_key_using_media_codec">pref.using_media_codec</string>
+    <string name="pref_title_using_media_codec">Using MediaCodec</string>
+    <string name="pref_summary_using_media_codec"></string>
+
+    <string name="pref_key_using_media_codec_auto_rotate">pref.using_media_codec_auto_rotate</string>
+    <string name="pref_title_using_media_codec_auto_rotate">Using MediaCodec auto rotate</string>
+    <string name="pref_summary_using_media_codec_auto_rotate"></string>
+
+    <string name="pref_key_media_codec_handle_resolution_change">pref.media_codec_handle_resolution_change</string>
+    <string name="pref_title_media_codec_handle_resolution_change">MediaCodec handle resolution change</string>
+    <string name="pref_summary_media_codec_handle_resolution_change"></string>
+
+    <string name="pref_key_pixel_format">pref.pixel_format</string>
+    <string name="pref_title_pixel_format">Pixel Format</string>
+    <string-array name="pref_entries_pixel_format">
+        <item>Auto Select</item>
+        <item>RGB 565</item>
+        <item>RGB 888</item>
+        <item>RGBX 8888</item>
+        <item>YV12</item>
+        <item>OpenGL ES2</item>
+    </string-array>
+    <string-array name="pref_entry_values_pixel_format">
+        <item></item>
+        <item>fcc-rv16</item>
+        <item>fcc-rv24</item>
+        <item>fcc-rv32</item>
+        <item>fcc-yv12</item>
+        <item>fcc-_es2</item>
+    </string-array>
+    <string-array name="pref_entry_summaries_pixel_format">
+        <item>Auto Select</item>
+        <item>RGB 565</item>
+        <item>RGB 888</item>
+        <item>RGBX 8888</item>
+        <item>YV12</item>
+        <item>OpenGL ES2</item>
+    </string-array>
+
+    <!-- -->
+    <string name="pref_title_ijkplayer_audio">Audio: ijkplayer</string>
+
+    <string name="pref_key_using_opensl_es">pref.using_opensl_es</string>
+    <string name="pref_title_using_opensl_es">Using OpenSL ES</string>
+    <string name="pref_summary_using_opensl_es"></string>
+
+    <!-- -->
+    <string name="pref_title_render_view">RenderView</string>
+
+    <string name="pref_key_enable_no_view">pref.enable_no_view</string>
+    <string name="pref_title_enable_no_view">Enable NoView</string>
+    <string name="pref_summary_enable_no_view"></string>
+
+    <string name="pref_key_enable_surface_view">pref.enable_surface_view</string>
+    <string name="pref_title_enable_surface_view">Enable SurfaceView</string>
+    <string name="pref_summary_enable_surface_view"></string>
+
+    <string name="pref_key_enable_texture_view">pref.enable_texture_view</string>
+    <string name="pref_title_enable_texture_view">Enable TextureView</string>
+    <string name="pref_summary_enable_texture_view"></string>
+
+    <string name="pref_key_enable_detached_surface_texture">pref.enable_detached_surface_texture</string>
+    <string name="pref_title_enable_detached_surface_texture">Enable detached SurfaceTexture</string>
+    <string name="pref_summary_enable_detached_surface_texture"></string>
+
+    <!-- -->
+    <string name="pref_title_misc">Misc</string>
+    <string name="pref_key_using_mediadatasource">pref.using_mediadatasource</string>
+    <string name="pref_title_using_mediadatasource">Using MediaDataSource</string>
+    <string name="pref_summary_using_mediadatasource"></string>
+
+    <!-- -->
+    <string name="pref_key_last_directory"></string>
+
+    <string name="uf_collect">收藏</string>
+    <string name="uf_setting">设置</string>
+    <string name="user_privacy_title">用户隐私权政策</string>
+
+    <string name="st_play_download">播放和下载</string>
+    <string name="st_cache">清除缓存</string>
+    <string name="st_cache_count">正在计算</string>
+    <string name="st_update">检查更新</string>
+    <string name="st_push_message">消息推送</string>
+    <string name="st_open_message">已打开</string>
+    <string name="st_close_message">已关闭</string>
+    <string name="st_current_new">当前已是最新版本</string>
+    <string name="st_no_wifi">非wifi环境下播放提醒</string>
+    <string name="st_remind_often">每次播放提醒</string>
+    <string name="st_remind_once">仅开启应用后提醒一次</string>
+    <string name="st_new_version_not_found">未发现有新版本</string>
+    <string name="st_message_content">开启推送通知，在没有打开中文电视时，也能保证收到最新影视消息</string>
+
+    <!--upgrade -->
+    <string name="upgrade_tip">已检测到最新版本</string>
+    <string name="upgrade_immediate">立即更新</string>
+    <string name="upgrade_later">稍 后</string>
+    <string name="st_down_ing">正在下载中，请稍候</string>
+    <string name="st_force_upgrade_tip">您当前的版本太过老旧已无法使用，请下载安装最新版本</string>
+
+    <string name="my_collect">我的收藏</string>
+    <string name="mine">我的</string>
+    <string name="collect_choice_all">全选</string>
+    <string name="collect_delete">删除</string>
+    <string name="collect_choice_none">取消全选</string>
+    <string name="collect_edit">编辑</string>
+    <string name="collect_quit">取消</string>
+    <string name="collect_live">直播</string>
+    <string name="collect_vod">点播</string>
+    <string name="person_update_to">更新至第</string>
+    <string name="variety_style_data_finish">已完结</string>
+    <string name="st_clear_total_cache">缓存已清除</string>
+    <string name="user_privacy_protocal">用户隐私权政策</string>
+    <string name="user_current_versionCode">iTalkBB&#160;&#160;</string>
+    <string name="facebook_app_id">2306834906239538</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <!--user-->
+    <string name="user_mc">主播：</string>
+    <string name="user_host">主持人：</string>
+    <string name="user_type">类型：</string>
+    <string name="user_leadingrole">主演：</string>
+    <string name="user_director">导演：</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_login">登录</string>
+    <string name="user_login_international">登录</string>
+    <string name="user_special_login_international">iTalkBB 用户可直接登录</string>
+    <string name="user_collection">我的收藏</string>
+    <string name="user_clear_cache">清除缓存</string>
+    <string name="user_msg">消息推送</string>
+    <string name="user_wifi">非wifi操作提醒</string>
+    <string name="user_wifi_once">一次</string>
+    <string name="user_wifi_always">总是</string>
+    <string name="user_name">输入邮箱</string>
+    <string name="user_password">输入密码</string>
+    <string name="user_help">寻求帮助</string>
+    <string name="user_signup">注册</string>
+    <string name="user_signup_international">注册</string>
+    <string name="down_line_msg">通过此账号登录的设备已经超出最大数量限制，您已被迫下线。</string>
+    <string name="user_error">用户名或密码错误，请重新输入</string>
+    <string name="option_faile">操作失败请重试！</string>
+    <string name="param_error">参数错误</string>
+    <string name="login_fail">登录失败</string>
+    <string name="login_success">登录成功</string>
+    <string name="user_expired">服务过期用户或无服务用户！</string>
+    <string name="token_faile">token认证失败，需要重新登录！</string>
+    <string name="userInfo_faile">获取用户信息失败！</string>
+    <string name="interface_faile">调用接口失败！</string>
+    <string name="downline_relogin">设备已下线，请重新登录！</string>
+    <string name="help_info">请致电客服\n1&#8211;877&#8211;482&#8211;5503寻求帮助</string>
+    <string name="one_key_call">一键呼叫</string>
+    <string name="cancel">取消</string>
+    <string name="logout_comfirm">确定退出登录?</string>
+    <string name="sure">确定</string>
+    <string name="next">下一步</string>
+    <string name="_close">关闭</string>
+    <string name="login_out">退出登录</string>
+    <string name="relogin">重新登录</string>
+    <string name="no_collect">暂无收藏内容</string>
+    <string name="imLogin">立即登录</string>
+    <string name="more_info">更多资讯:</string>
+
+    <string name="download_now">立即下载</string>
+    <string name="remind_later">稍后再说</string>
+
+    <!--hobbit-->
+    <string name="check_hobbit">请选择您感兴趣的方向</string>
+    <string name="base_hobbit">@string/hot</string>
+    <string name="max_choose">您最多可以选择五项</string>
+
+    <!--recent-->
+    <string name="no_recent_tip">看官，随便看点节目呗</string>
+    <string name="recent_record">最近播放</string>
+    <string name="recent_empty">暂无最近播放内容</string>
+    <string name="last_position">观看至</string>
+
+    <!--common-->
+    <string name="measure_word_drama">集</string>
+    <string name="measure_word_audio">话</string>
+    <!-- Notification -->
+    <string name="notification_channel_name_message">普通推送</string>
+    <string name="notification_channel_description_message">普通消息推送</string>
+
+    <!--search-->
+
+    <string name="search">搜索</string>
+    <string name="search_long_name">搜索</string>
+    <string name="search_short_name">搜索</string>
+    <string name="search_result_tip1">搜索到</string>
+    <string name="search_result_tip2">的相关</string>
+    <string name="search_result_tip3">条</string>
+    <string name="search_result_tip4">结果</string>
+    <string name="sub_count_0">【共</string>
+    <string name="sub_count_1">集】</string>
+
+    <!--广告-->
+    <string name="ad_tag_url"><![CDATA[https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=]]></string>
+    <!--google cast-->
+    <string name="media_route_menu_title">Play on&#8230;</string>
+    <string name="cast_exit">退出投屏</string>
+    <string name="cast_casting">正在投屏中...</string>
+    <string name="ccl_id">584C20C6</string>
+    <string name="multi_speed">1.0X</string>
+
+    <!--邀请码 活动码-->
+    <string name="input_invite_code">填写邀请码</string>
+    <string name="input_activity_code">填写活动码</string>
+    <string name="input_invite_code_hint">输入推荐人邀请码</string>
+    <string name="input_activity_code_hint">输入活动码</string>
+    <string name="input_later">稍后再说</string>
+    <string name="input_confirm">确认</string>
+    <string name="copy_complete">已复制到剪切板</string>
+    <string name="invite_code_invalid">激活邀请码失败</string>
+    <string name="activity_code_invalid">激活活动码失败</string>
+    <string name="invite_code_success">激活邀请码成功</string>
+    <string name="activity_code_success">激活活动码成功</string>
+    <string name="invite_code_null">邀请码不能为空</string>
+
+
+    <string name="error_invitecode_invalid">邀请码不存在</string>
+    <string name="error_invitecode_used">设备或用户已被邀请过</string>
+    <string name="error_invitecode_myself">不能使用自己的邀请码</string>
+
+    <string name="error_activitycode_invalid">活动码不存在</string>
+    <string name="error_activity_not_start">活动未开始</string>
+    <string name="error_activity_finish">活动已结束</string>
+    <string name="error_activitycode_used_device">设备已使用过此活动码</string>
+    <string name="error_activitycode_used_again">此活动码不可重复使用</string>
+
+</resources>

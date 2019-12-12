@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.wsy.testuiapplication.DFRoundTextView
+        android:id="@+id/tv_kotlin"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/btn_login_height"
+        android:enabled="true"
+        android:gravity="center"
+        android:text="点击进入kotlin的世界吧"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_tv_btn"
+        app:df_round_text_color="@color/colorPrimary"
+        app:df_round_text_conner="@dimen/btn_corner_in_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/et_pwd"
+        app:layout_constraintRight_toRightOf="@id/et_pwd"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07999998" />
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="@dimen/iv_logo_width"
+        android:layout_height="@dimen/iv_logo_height"
+        android:background="@drawable/log_in_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.16" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/et_name_margin_left"
+        android:layout_marginRight="@dimen/et_name_margin_right"
+        android:background="@null"
+        android:hint="@string/user_name"
+        android:imeActionLabel="@string/next"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:textColorHint="@color/play_played_bg"
+        android:textSize="@dimen/size_tv_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.36" />
+
+    <View
+        android:id="@+id/line_name"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/v_et_line_height"
+        android:layout_marginTop="@dimen/v_et_line_margin_top"
+        android:background="@color/color_dddddd"
+        app:layout_constraintLeft_toLeftOf="@id/et_name"
+        app:layout_constraintRight_toRightOf="@id/et_name"
+        app:layout_constraintTop_toBottomOf="@id/et_name" />
+
+    <EditText
+        android:id="@+id/et_pwd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/et_pwd_margin_top"
+        android:background="@null"
+        android:hint="@string/user_password"
+        android:imeActionLabel="@string/user_login_international"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:textColorHint="@color/play_played_bg"
+        android:textSize="@dimen/size_tv_pwd"
+        app:layout_constraintLeft_toLeftOf="@id/et_name"
+        app:layout_constraintRight_toRightOf="@id/et_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_name" />
+
+    <View
+        android:id="@+id/line_pwd"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/v_et_line_height"
+        android:layout_marginTop="@dimen/v_et_line_margin_top"
+        android:background="@color/color_dddddd"
+        app:layout_constraintLeft_toLeftOf="@id/et_pwd"
+        app:layout_constraintRight_toRightOf="@id/et_pwd"
+        app:layout_constraintTop_toBottomOf="@id/et_pwd" />
+
+    <com.wsy.testuiapplication.DFRoundTextView
+        android:id="@+id/tv_login_activity"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/btn_login_height"
+        android:layout_marginBottom="@dimen/btn_login_margin_bottom"
+        android:enabled="true"
+        android:gravity="center"
+        android:text="@string/user_login_international"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_tv_btn"
+        app:df_round_text_color="@color/colorPrimary"
+        app:df_round_text_conner="@dimen/btn_corner_in_login"
+        app:layout_constraintBottom_toTopOf="@id/tv_signup_activity"
+        app:layout_constraintLeft_toLeftOf="@id/et_pwd"
+        app:layout_constraintRight_toRightOf="@id/et_pwd" />
+
+    <com.wsy.testuiapplication.DFRoundTextView
+        android:id="@+id/tv_signup_activity"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/btn_signup_height"
+        android:layout_marginBottom="@dimen/btn_signup_margin_bottom"
+        android:gravity="center"
+        android:text="@string/user_signup_international"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/size_tv_btn"
+        app:df_round_text_color="@color/colorPrimary"
+        app:df_round_text_conner="@dimen/btn_corner_in_login"
+        app:df_round_text_stock="@dimen/btn_border"
+        app:layout_constraintBottom_toTopOf="@+id/containerLayout"
+        app:layout_constraintLeft_toLeftOf="@id/et_pwd"
+        app:layout_constraintRight_toRightOf="@id/et_pwd" />
+
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tv_error_margin_top"
+        android:text="登录失败"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/size_tv_login_fail"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/et_pwd"
+        app:layout_constraintTop_toBottomOf="@id/line_pwd" />
+
+    <ImageView
+        android:id="@+id/iv_eye"
+        android:layout_width="@dimen/iv_eye_width"
+        android:layout_height="@dimen/iv_eye_height"
+        android:src="@mipmap/icon_eye_blind"
+        android:tint="@color/color_cccccc"
+        app:layout_constraintBottom_toBottomOf="@id/et_pwd"
+        app:layout_constraintEnd_toEndOf="@id/et_pwd" />
+
+    <ImageView
+        android:id="@+id/iv_help"
+        android:layout_width="@dimen/iv_icon_width"
+        android:layout_height="@dimen/iv_icon_height"
+        android:layout_marginTop="@dimen/iv_icon_margin_top"
+        android:layout_marginRight="@dimen/iv_icon_help_margin_right"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_log_in_help" />
+
+    <ImageView
+        android:id="@+id/iv_close_login"
+        android:layout_width="@dimen/iv_icon_width"
+        android:layout_height="@dimen/iv_icon_height"
+        android:layout_marginTop="@dimen/iv_icon_margin_top"
+        android:layout_marginRight="@dimen/iv_icon_close_margin_right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_log_in_close" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/containerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/tv_login_tip1_margin_left"
+        android:layout_marginRight="@dimen/tv_login_tip1_margin_right"
+        android:layout_marginBottom="@dimen/tv_login_tip1_margin_bottom"
+        app:layout_constraintBottom_toTopOf="@+id/tv_tip_login2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_tip_login1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="的方法搜覅叫啥；大姐夫发送到发顺丰是非得失；我哦加斯佛伺服电机"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/size_tv_login_tip1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_tip_login2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/tv_login_tip2_margin_left"
+        android:layout_marginRight="@dimen/tv_login_tip2_margin_right"
+        android:text="@string/tip_login2"
+        android:textColor="@color/color_666666"
+        android:textSize="@dimen/size_tv_login_tip2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <android.support.constraint.Group
+        android:id="@+id/group_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="containerLayout,tv_tip_login2" />
+
+    <TextView
+        android:id="@+id/tv_forget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tv_foget_pwd_margin_top"
+        android:layout_marginRight="@dimen/tv_foget_pwd_margin_right"
+        android:text="@string/login_forgetpsd"
+        android:textColor="@color/color_666666"
+        android:textSize="@dimen/size_tv_forget_pwd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_pwd" />
+</android.support.constraint.ConstraintLayout>

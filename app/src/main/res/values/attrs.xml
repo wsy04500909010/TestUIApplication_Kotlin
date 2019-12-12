@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="DFTabBarItem">
+        <attr name="df_icon_selected" format="reference" />
+        <attr name="df_icon_unselected" format="reference" />
+        <attr name="df_title" format="string" />
+        <attr name="df_text_size" format="dimension" />
+        <attr name="df_text_color_selected" format="color" />
+        <attr name="df_text_color_unselected" format="color" />
+        <attr name="df_default_selected" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="DFSwithButton">
+        <attr name="df_switch_button_color" format="color" />
+        <attr name="df_switch_button_innerPadding" format="dimension" />
+        <attr name="df_switch_button_textSize" format="dimension" />
+        <attr name="df_switch_button_textLeft" format="string" />
+        <attr name="df_switch_button_textRight" format="string" />
+        <attr name="df_switch_button_enable" format="boolean" />
+        <attr name="df_switch_button_textwidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="DFRoundTextView">
+        <attr name="df_round_text_color" format="color" />
+        <attr name="df_round_text_innerPadding" format="dimension" />
+        <attr name="df_round_text_conner" format="dimension" />
+        <attr name="df_round_text_stock" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="DFRoundLayout">
+        <attr name="df_rc_top_left_radius" format="dimension" />
+        <attr name="df_rc_top_right_radius" format="dimension" />
+        <attr name="df_rc_bottom_left_radius" format="dimension" />
+        <attr name="df_rc_bottom_right_radius" format="dimension" />
+        <attr name="df_rc_radius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="SwipeToLoadLayout">
+        <attr name="refresh_enabled" format="boolean" />
+        <attr name="load_more_enabled" format="boolean" />
+
+        <attr name="swipe_style" format="enum">
+            <enum name="classic" value="0" />
+            <enum name="above" value="1" />
+            <enum name="blew" value="2" />
+            <enum name="scale" value="3" />
+        </attr>
+
+        <attr name="drag_ratio" format="float" />
+
+        <attr name="refresh_trigger_offset" format="dimension" />
+        <attr name="load_more_trigger_offset" format="dimension" />
+        <attr name="refresh_final_drag_offset" format="dimension" />
+        <attr name="load_more_final_drag_offset" format="dimension" />
+
+        <attr name="swiping_to_refresh_to_default_scrolling_duration" format="integer" />
+        <attr name="release_to_refreshing_scrolling_duration" format="integer" />
+        <attr name="refresh_complete_delay_duration" format="integer" />
+        <attr name="refresh_complete_to_default_scrolling_duration" format="integer" />
+        <attr name="default_to_refreshing_scrolling_duration" format="integer" />
+        <attr name="swiping_to_load_more_to_default_scrolling_duration" format="integer" />
+        <attr name="release_to_loading_more_scrolling_duration" format="integer" />
+        <attr name="load_more_complete_delay_duration" format="integer" />
+        <attr name="load_more_complete_to_default_scrolling_duration" format="integer" />
+        <attr name="default_to_loading_more_scrolling_duration" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="DFProgressBar">
+        <attr name="df_progress_show_loading_txt" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="DFTextView">
+        <attr name="df_textview_corner_radius" format="dimension" />
+        <attr name="df_textview_has_selector" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="DFRoundBackground">
+        <attr name="df_round_background_radius" format="dimension" />
+        <attr name="df_round_background_color" format="color" />
+        <attr name="df_round_background_transparent" format="integer" />
+    </declare-styleable>
+</resources>

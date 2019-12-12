@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <ImageView
+        android:id="@+id/iv_user"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/img_user_center_avatar_unlogin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".15" />
+
+    <TextView
+        android:id="@+id/mtv_login_drawer"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/user_login"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_nick_name"
+        app:layout_constraintTop_toBottomOf="@id/iv_user" />
+
+    <View
+        android:id="@+id/line_drawer"
+        android:layout_width="2px"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_user" />
+
+    <TextView
+        android:id="@+id/mtv_signup_drawer"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/user_signup"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_nick_name"
+        app:layout_constraintTop_toBottomOf="@+id/iv_user" />
+
+    <!--最近播放-->
+
+    <ImageView
+        android:id="@+id/iv_recent"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="95dp"
+        android:src="@mipmap/user_center_recent"
+        app:layout_constraintHorizontal_bias=".12"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_user" />
+
+    <TextView
+        android:id="@+id/tv_collection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="@string/recent_record"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_recent"
+        app:layout_constraintLeft_toRightOf="@id/iv_recent"
+        app:layout_constraintTop_toTopOf="@id/iv_recent" />
+    <!-- 清除缓存 -->
+
+    <ImageView
+        android:id="@+id/iv_clear"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/img_personalcenter_clear"
+        app:layout_constraintLeft_toLeftOf="@id/iv_recent"
+        app:layout_constraintTop_toBottomOf="@id/iv_recent" />
+
+    <TextView
+        android:id="@+id/tv_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_clear_cache"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_clear"
+        app:layout_constraintLeft_toLeftOf="@id/tv_collection"
+        app:layout_constraintTop_toTopOf="@id/iv_clear" />
+
+    <TextView
+        android:id="@+id/tv_clear_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_clear"
+        app:layout_constraintLeft_toRightOf="@id/barrier"
+        app:layout_constraintTop_toTopOf="@id/tv_clear" />
+
+    <!--消息推送 -->
+    <ImageView
+        android:id="@+id/iv_msg"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/img_personalcenter_message"
+        app:layout_constraintLeft_toLeftOf="@id/iv_clear"
+        app:layout_constraintTop_toBottomOf="@id/iv_clear" />
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_msg"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_msg"
+        app:layout_constraintLeft_toLeftOf="@id/tv_clear"
+        app:layout_constraintTop_toTopOf="@id/iv_msg" />
+
+    <com.wsy.testuiapplication.widget.DFSwithButton
+        android:id="@+id/msb_msg"
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        app:df_switch_button_color="@color/colorPrimary"
+        app:df_switch_button_enable="false"
+        app:df_switch_button_textLeft="开"
+        app:df_switch_button_textRight="关"
+        app:layout_constraintBottom_toBottomOf="@id/tv_msg"
+        app:layout_constraintLeft_toLeftOf="@id/tv_clear_size"
+        app:layout_constraintTop_toTopOf="@id/tv_msg" />
+    <!--非wifi操作-->
+    <ImageView
+        android:id="@+id/iv_wifi"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/img_personalcenter_remind"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="@id/iv_msg"
+        app:layout_constraintTop_toBottomOf="@id/iv_msg" />
+
+    <TextView
+        android:id="@+id/tv_wifi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_wifi"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_wifi"
+        app:layout_constraintLeft_toLeftOf="@id/tv_clear"
+        app:layout_constraintTop_toTopOf="@id/iv_wifi" />
+
+    <com.wsy.testuiapplication.widget.DFSwithButton
+        android:id="@+id/msb_wifi"
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        app:df_switch_button_color="@color/colorPrimary"
+        app:df_switch_button_textLeft="@string/user_wifi_once"
+        app:df_switch_button_textRight="@string/user_wifi_always"
+        app:layout_constraintBottom_toBottomOf="@id/tv_wifi"
+        app:layout_constraintLeft_toLeftOf="@id/tv_clear_size"
+        app:layout_constraintTop_toTopOf="@id/tv_wifi" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="right"
+        app:constraint_referenced_ids="tv_collection,tv_clear,tv_msg,tv_wifi" />
+
+    <View
+        android:id="@+id/view_recent"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_collection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_collection" />
+
+    <View
+        android:id="@+id/view_clear"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_clear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_clear" />
+
+    <View
+        android:id="@+id/view_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_msg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_msg" />
+
+    <TextView
+        android:id="@+id/tv_nick_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="8dp"
+        android:lines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_user" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="290dp"
+        android:layout_height="1px"
+        android:layout_marginBottom="22dp"
+        android:background="@color/color_cccccc"
+        app:layout_constraintBottom_toTopOf="@+id/imageView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:background="@mipmap/img_personal_center_logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iv_wifi"
+        app:layout_constraintStart_toStartOf="@+id/iv_wifi" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_out"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/tv_wifi"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <View
+        android:id="@+id/view_logout"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <android.support.constraint.Group
+        android:id="@+id/logout_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="textView,imageView,view_logout,view4" />
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/color_cccccc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

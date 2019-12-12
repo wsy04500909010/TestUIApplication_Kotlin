@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--login-->
+    <dimen name="iv_logo_width">101.3dp</dimen>
+    <dimen name="iv_logo_height">31.5dp</dimen>
+    <dimen name="et_name_margin_left">24.0dp</dimen>
+    <dimen name="et_name_margin_right">24.0dp</dimen>
+    <dimen name="v_et_line_height">0.8dp</dimen>
+    <dimen name="v_et_line_margin_top">3.8dp</dimen>
+    <dimen name="et_pwd_margin_top">20.0dp</dimen>
+    <dimen name="btn_login_height">30.0dp</dimen>
+    <dimen name="btn_signup_height">30.0dp</dimen>
+    <dimen name="btn_login_margin_bottom">10.0dp</dimen>
+    <dimen name="btn_signup_margin_bottom">14.0dp</dimen>
+    <dimen name="btn_corner_in_login">9.0dp</dimen>
+    <dimen name="btn_border">1.0dp</dimen>
+    <dimen name="tv_error_margin_top">6dp</dimen>
+    <dimen name="iv_eye_width">28.5dp</dimen>
+    <dimen name="iv_eye_height">18.0dp</dimen>
+    <dimen name="iv_icon_width">16.5dp</dimen>
+    <dimen name="iv_icon_height">16.5dp</dimen>
+    <dimen name="iv_icon_margin_top">21.8dp</dimen>
+    <dimen name="iv_icon_help_margin_right">51.0dp</dimen>
+    <dimen name="iv_icon_close_margin_right">22.5dp</dimen>
+    <dimen name="tv_login_tip1_margin_left">39.0dp</dimen>
+    <dimen name="tv_login_tip1_margin_right">39.0dp</dimen>
+    <dimen name="tv_login_tip1_margin_bottom">6.0dp</dimen>
+    <dimen name="tv_login_tip2_margin_left">39.0dp</dimen>
+    <dimen name="tv_login_tip2_margin_right">39.0dp</dimen>
+    <dimen name="tv_foget_pwd_margin_top">6dp</dimen>
+    <dimen name="tv_foget_pwd_margin_right">18.0dp</dimen>
+    <!--signup-->
+    <dimen name="bottom_layout_height">45.0dp</dimen>
+    <dimen name="iv_logo_margin">7.5dp</dimen>
+    <dimen name="webview_layout_margin_top">56.3dp</dimen>
+    <dimen name="webview_layout_margin_bottom">45.0dp</dimen>
+    <dimen name="tv_signin_tip_margin_top">3.8dp</dimen>
+
+    <dimen name="progressbar_width">22.5dp</dimen>
+    <dimen name="progressbar_height">22.5dp</dimen>
+    <dimen name="iv_close_signup_width">16.5dp</dimen>
+    <dimen name="iv_close_signup_height">16.5dp</dimen>
+    <dimen name="tv_logintext_signup_margin_right">18.8dp</dimen>
+    <dimen name="tv_signup_title_margin_top">17.3dp</dimen>
+    <dimen name="iv_back_signup_width">21.0dp</dimen>
+    <dimen name="iv_back_signup_height">21.0dp</dimen>
+    <dimen name="iv_back_signup_margin_left">21.8dp</dimen>
+    <dimen name="iv_back_signup_margin_top">22.5dp</dimen>
+
+    <dimen name="btn_goto_login_height">33.0dp</dimen>
+    <dimen name="btn_goto_login_margin_left">12.0dp</dimen>
+    <dimen name="btn_goto_login_margin_right">12.0dp</dimen>
+    <dimen name="btn_goto_login_margin_top">11.3dp</dimen>
+    <dimen name="btn_corner_in_signup">16.5dp</dimen>
+
+    <dimen name="iv_logo_in_signup_width">75.0dp</dimen>
+    <dimen name="iv_logo_in_signup_height">21.0dp</dimen>
+    <!--drawer-->
+    <dimen name="iv_head_width">75.0dp</dimen>
+    <dimen name="iv_head_height">75.0dp</dimen>
+    <dimen name="tv_drawer_login_width">52.5dp</dimen>
+    <dimen name="tv_drawer_login_height">15.0dp</dimen>
+    <dimen name="tv_drawer_login_margin_top">7.2dp</dimen>
+    <dimen name="v_line_drawer_width">0.8dp</dimen>
+    <dimen name="v_line_drawer_height">15.0dp</dimen>
+    <dimen name="v_line_drawer_margin_top">7.2dp</dimen>
+    <dimen name="tv_drawer_signup_width">52.5dp</dimen>
+    <dimen name="tv_drawer_signup_height">15.0dp</dimen>
+    <dimen name="tv_drawer_signup_margin_top">7.2dp</dimen>
+
+    <dimen name="scrollview_margin_top">56.3dp</dimen>
+
+    <dimen name="iv_drawer_icon_recent_width">15.0dp</dimen>
+    <dimen name="iv_drawer_icon_recent_height">15.0dp</dimen>
+    <dimen name="iv_drawer_icon_recent_margin_top">11.3dp</dimen>
+    <dimen name="tv_drawer_rencent_margin_left">10.5dp</dimen>
+
+    <dimen name="iv_drawer_icon_clear_width">15.0dp</dimen>
+    <dimen name="iv_drawer_icon_clear_height">15.0dp</dimen>
+    <dimen name="iv_drawer_icon_clear_margin_top">22.5dp</dimen>
+    <dimen name="tv_drawer_clear_margin_left">15.0dp</dimen>
+    <dimen name="tv_drawer_clear_size_margin_left">24.0dp</dimen>
+
+    <dimen name="iv_drawer_icon_msg_width">15.0dp</dimen>
+    <dimen name="iv_drawer_icon_msg_height">15.0dp</dimen>
+    <dimen name="iv_drawer_icon_msg_margin_top">22.5dp</dimen>
+    <dimen name="btn_drawer_msg_switch_width">41.2dp</dimen>
+    <dimen name="btn_drawer_msg_switch_height">20.3dp</dimen>
+    <dimen name="btn_drawer_msg_switch_text_width">31.5dp</dimen>
+
+    <dimen name="iv_drawer_icon_wifi_width">15.0dp</dimen>
+    <dimen name="iv_drawer_icon_wifi_height">15.0dp</dimen>
+    <dimen name="iv_drawer_icon_wifi_margin_top">22.5dp</dimen>
+    <dimen name="btn_drawer_wifi_switch_width">41.2dp</dimen>
+    <dimen name="btn_drawer_wifi_switch_height">20.3dp</dimen>
+    <dimen name="btn_drawer_wifi_switch_text_width">31.5dp</dimen>
+
+    <dimen name="iv_drawer_icon_logout_margin_top">22.5dp</dimen>
+
+    <dimen name="tap_background_height">30.0dp</dimen>
+
+    <dimen name="tv_nickname_margin_top">11.3dp</dimen>
+
+    <dimen name="v_line_bottom_width">217.5dp</dimen>
+    <dimen name="v_line_bottom_height">0.4dp</dimen>
+    <dimen name="v_line_bottom_margin_bottom">45dp</dimen>
+
+    <dimen name="iv_drawer_icon_logout_width">15.0dp</dimen>
+    <dimen name="iv_drawer_icon_logout_height">15.0dp</dimen>
+    <dimen name="iv_drawer_icon_logout_margin_bottom">16.5dp</dimen>
+    <dimen name="v_drawer_logout_tap_background_height">46.5dp</dimen>
+
+    <dimen name="tv_version_margin_top">22.5dp</dimen>
+    <dimen name="tv_version_margin_right">15.0dp</dimen>
+
+    <dimen name="iv_society_icon_width">24.0dp</dimen>
+    <dimen name="iv_society_icon_height">24.0dp</dimen>
+    <dimen name="iv_ins_icon_margin_left">11.3dp</dimen>
+    <dimen name="iv_youtube_icon_margin_left">18.8dp</dimen>
+    <dimen name="iv_facebook_icon_margin_left">18.8dp</dimen>
+
+    /**********字体适配***************/
+    <dimen name="size_tv_forget_pwd">10.5sp</dimen>
+    <dimen name="size_tv_login_fail">10.5sp</dimen>
+    <dimen name="size_tv_name">10.5sp</dimen>
+    <dimen name="size_tv_pwd">10.5sp</dimen>
+    <dimen name="size_tv_btn">10.5sp</dimen>
+    <dimen name="size_tv_drawer_login">10.5sp</dimen>
+    <dimen name="size_tv_drawer_signup">10.5sp</dimen>
+    <dimen name="size_tv_drawer_nickname">10.5sp</dimen>
+    <dimen name="size_tv_login_tip1">8.3sp</dimen>
+    <dimen name="size_tv_login_tip2">7.5sp</dimen>
+    <dimen name="size_tv_drawer_recent">10.5sp</dimen>
+    <dimen name="size_tv_drawer_clear">10.5sp</dimen>
+    <dimen name="size_tv_drawer_msg">10.5sp</dimen>
+    <dimen name="size_tv_drawer_wifi">10.5sp</dimen>
+    <dimen name="size_tv_drawer_logout">10.5sp</dimen>
+    <dimen name="size_tv_drawer_more_info">10.5sp</dimen>
+    <dimen name="size_tv_drawer_switch">9.0sp</dimen>
+    <dimen name="size_tv_signup_title">12.0sp</dimen>
+    <dimen name="size_tv_signup_tip">9.0sp</dimen>
+    <dimen name="size_tv_signup_skip">10.5sp</dimen>
+
+</resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "312801475252",
+    "firebase_url": "https://ceshi-6c4d2.firebaseio.com",
+    "project_id": "ceshi-6c4d2",
+    "storage_bucket": "ceshi-6c4d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312801475252:android:8c41c0edbf8bcf57",
+        "android_client_info": {
+          "package_name": "com.wsy.testuiapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312801475252-9oub25mq74664du50auq6qqmiu4u10ee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4RD5o1IeveCDBl0r98sRN6gAggO9GC04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312801475252-9oub25mq74664du50auq6qqmiu4u10ee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
