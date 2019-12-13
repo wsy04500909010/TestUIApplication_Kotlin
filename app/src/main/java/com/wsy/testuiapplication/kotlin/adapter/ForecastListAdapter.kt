@@ -2,6 +2,7 @@ package com.wsy.testuiapplication.kotlin.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,8 @@ import com.wsy.testuiapplication.R
 import com.wsy.testuiapplication.kotlin.bean2.ForcastBean
 import org.jetbrains.anko.find
 
-class ForecastListAdapter(val context: Context, val items: List<ForcastBean>, val listener: OnItemClickListener)
+class ForecastListAdapter(val context: Context, val items: List<ForcastBean>, val listener: (ForcastBean) -> Int)
+//class ForecastListAdapter(val context: Context, val items: List<ForcastBean>, val listener: OnItemClickListener)
     : RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
@@ -34,17 +36,16 @@ class ForecastListAdapter(val context: Context, val items: List<ForcastBean>, va
     }
 
 
-    class ViewHolder(view: View, itemClick: OnItemClickListener) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, val itemClick: (ForcastBean) -> Int) : RecyclerView.ViewHolder(view) {
+        //    class ViewHolder(view: View, val itemClick: OnItemClickListener) : RecyclerView.ViewHolder(view) {
         var date: TextView? = null
         var high: TextView? = null
         var low: TextView? = null
-        var listener: OnItemClickListener? = null
 
         init {
             date = view.find(R.id.date)
             high = view.find(R.id.maxTemperature)
             low = view.find(R.id.minTemperature)
-            listener = itemClick
         }
 
         fun bindForecastData(forecast: ForcastBean) {
@@ -52,7 +53,9 @@ class ForecastListAdapter(val context: Context, val items: List<ForcastBean>, va
             high?.text = forecast.high.toString()
             low?.text = forecast.low.toString()
             itemView.setOnClickListener {
-                listener?.invoke(forecast)
+                //   itemClick?.invoke(forecast)
+                var a: Int = itemClick(forecast)
+                Log.d("ForecastListAdapter", a.toString())
             }
         }
     }
