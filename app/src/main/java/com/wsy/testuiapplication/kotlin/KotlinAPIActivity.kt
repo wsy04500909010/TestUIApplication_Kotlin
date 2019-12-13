@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.wsy.testuiapplication.R
+import com.wsy.testuiapplication.kotlin.adapter.ForecastListAdapter
 import com.wsy.testuiapplication.kotlin.bean.ForcastBean
 import kotlinx.android.synthetic.main.activity_kotlin_api.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import java.net.URL
+import com.wsy.testuiapplication.kotlin.bean2.ForcastBean as ModelBean
 
 class KotlinAPIActivity : AppCompatActivity() {
 
@@ -18,15 +20,21 @@ class KotlinAPIActivity : AppCompatActivity() {
         private val TAG = "KotlinAPIActivity"
     }
 
+    var forecastList: MutableList<ModelBean> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kotlin_api)
 
 //        getDataFromAPI()
+
         rv.layoutManager = LinearLayoutManager(this)
-        //todo
-//        rv.adapter = ForecastListAdapter(this,)
+        rv.adapter = ForecastListAdapter(this, forecastList, object : ForecastListAdapter.OnItemClickListener {
+            override fun invoke(forecast: ModelBean) {
+                Log.d(TAG, forecast.cityName + "===" + forecast.high + "===" + forecast.low)
+            }
+
+        })
         getDataFromAPItoGson()
     }
 
@@ -60,7 +68,10 @@ class KotlinAPIActivity : AppCompatActivity() {
             Log.d(TAG, result.name + "\n" + result.cod)
 
             uiThread {
-
+                var modelBean: ModelBean = DataMapper().filterData(result)
+                forecastList.clear()
+                forecastList.add(modelBean)
+                rv.adapter?.notifyDataSetChanged()
             }
 
         }
