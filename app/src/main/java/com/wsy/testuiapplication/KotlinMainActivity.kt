@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.wsy.testuiapplication.kotlin.CollectionActivity
 import com.wsy.testuiapplication.kotlin.KotlinAPIActivity
 import com.wsy.testuiapplication.kotlin.adapter.MainListAdapter
 import com.wsy.testuiapplication.kotlin.bean.Animal
@@ -61,6 +62,13 @@ class KotlinMainActivity : AppCompatActivity() {
             }
 
         })
+
+        btn_collection?.setOnClickListener(){
+            startActivity(Intent(this@KotlinMainActivity, CollectionActivity::class.java))
+        }
+
+
+
         //这里使用对Animal类的扩展参数
         Animal("喵喵").newFunction("newFunctionText")
     }

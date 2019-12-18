@@ -32,6 +32,7 @@
         <activity android:name=".CustomViewActivity"></activity>
         <activity android:name=".KotlinMainActivity"></activity>
         <activity android:name=".kotlin.KotlinAPIActivity"></activity>
+        <activity android:name=".kotlin.CollectionActivity"></activity>
 
         <service
             android:name=".service.MyFirebaseMessagingService"

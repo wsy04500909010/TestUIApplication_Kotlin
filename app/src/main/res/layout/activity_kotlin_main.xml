@@ -18,4 +18,10 @@
         android:layout_height="wrap_content"
         android:text="api请求数据" />
 
+    <Button
+        android:id="@+id/btn_collection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="集合和函数" />
+
 </LinearLayout>
