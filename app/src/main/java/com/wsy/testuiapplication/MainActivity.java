@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -104,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
         iv_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,CustomViewActivity.class));
+                startActivity(new Intent(MainActivity.this,TVBAdActivity.class));
+//                startActivity(new Intent(MainActivity.this,CustomViewActivity.class));
             }
         });
 

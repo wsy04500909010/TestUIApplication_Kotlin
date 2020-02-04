@@ -34,6 +34,8 @@
         <activity android:name=".kotlin.KotlinAPIActivity"></activity>
         <activity android:name=".kotlin.CollectionActivity"></activity>
 
+        <activity android:name=".TVBAdActivity" />
+
         <service
             android:name=".service.MyFirebaseMessagingService"
             android:exported="false">
