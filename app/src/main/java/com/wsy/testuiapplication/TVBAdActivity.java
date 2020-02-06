@@ -1,12 +1,15 @@
 package com.wsy.testuiapplication;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
@@ -66,6 +69,8 @@ public class TVBAdActivity extends HXBaseActivity {
 
     private Handler mHandler;
 
+    private boolean storagePermission;
+
 
     @Override
     protected void initView() {
@@ -73,12 +78,46 @@ public class TVBAdActivity extends HXBaseActivity {
         mAdImage = (ImageView) findViewById(R.id.iv_ad);
         mVideoView = (VideoView) findViewById(R.id.videoView);
 
+
+        // 准备图片假数据
         prepareDatas();
 //        getIntentData();
 
         initHandler();
 
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permission,
+                                           int[] grantResults) {
+        //requestCode就是requestPermissions()的第三个参数
+        //permission就是requestPermissions()的第二个参数
+        //grantResults是结果，0调试通过，-1表示拒绝
+
+        switch (requestCode) {
+            case 100:
+                switch (permission[0]) {
+                    case Manifest.permission.READ_EXTERNAL_STORAGE://权限1
+                    case Manifest.permission.WRITE_EXTERNAL_STORAGE://权限2
+                        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                            //        本地视频
+                            String videoUrl = Environment.getExternalStorageDirectory().getPath() + "/yewen.mp4";
+                            //设置视频路径
+                            mVideoView.setVideoPath(videoUrl);
+
+                        } else {
+                            Toast.makeText(this, "You denied the permission", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    default:
+                }
+                break;
+            default:
+        }
+    }
+
 
     //准备假数据
     private void prepareDatas() {
@@ -94,7 +133,6 @@ public class TVBAdActivity extends HXBaseActivity {
         mImageAdBean.setImages(mAdImages);
 
     }
-
 
     private void initHandler() {
 
@@ -132,9 +170,8 @@ public class TVBAdActivity extends HXBaseActivity {
                         mCurrentAdImageIndex++;
                         if (mCurrentAdImageIndex < mImageAdBean.getImages().size()) {
 //                            ImageUtil.showImage(TVBAdActivity.this, mImageAdBean.getImages().get(mCurrentAdImageIndex), mAdImage);
-//                            ImageUtil.showImage(TVBAdActivity.this, "http://b.zol-img.com.cn/desk/bizhi/image/5/1920x1200/1409194293467.jpg", mAdImage);
 
-                            Glide.with(TVBAdActivity.this).load("https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png").into(mAdImage);
+                            Glide.with(TVBAdActivity.this).load(mImageAdBean.getImages().get(mCurrentAdImageIndex)).dontAnimate().into(mAdImage);
                             mHandler.sendEmptyMessageDelayed(TYPE_IMAGE_AD_TIME_COUNT, mImageAdBean.getDisplayTime());
                         } else {
                             imageAdFinish();
@@ -154,6 +191,7 @@ public class TVBAdActivity extends HXBaseActivity {
             if (old_duration == duration && mVideoView.isPlaying()) {
 
                 mAdWaitTime++;
+                Slog.d(TAG, "ad wait=" + mAdWaitTime + "");
                 if (mAdWaitTime == 10) {
                     mVideoView.stopPlayback();
                     startTVBPage();
@@ -179,7 +217,7 @@ public class TVBAdActivity extends HXBaseActivity {
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mHandler.sendEmptyMessageDelayed(AD_READY, 2000);
+                mHandler.sendEmptyMessage(AD_READY);
             }
         });
         mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -217,22 +255,14 @@ public class TVBAdActivity extends HXBaseActivity {
 
         //加载数据开始干3件事
         //1、计时
-//        mHandler.sendEmptyMessageDelayed(TYPE_REQUEST_AD_TIME, 5000);
-
-        //2、发送图片广告请求
+        mHandler.sendEmptyMessageDelayed(TYPE_REQUEST_AD_TIME, 5000);
+//
+//        //2、发送图片广告请求
+        requestForImageAd(false);
 //        requestForImageAd(true);
-        //3、发送视频广告请求
-//        requestForMediaAd(false);
-//        requestForMediaAd(true);
-
-
-        //网络视频
-//        String videoUrl = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
-        String videoUrl = Environment.getExternalStorageDirectory().getPath() + "/yewen.mp4";
-//        String videoUrl = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
-        Uri uri = Uri.parse(videoUrl);
-        //设置视频路径
-        mVideoView.setVideoURI(uri);
+//        //3、发送视频广告请求
+////        requestForMediaAd(false);
+        requestForMediaAd(true);
 
 
     }
@@ -248,8 +278,6 @@ public class TVBAdActivity extends HXBaseActivity {
                 imageAdFinish();
             }
         }
-
-
     }
 
     private void requestForMediaAd(boolean flag) {
@@ -307,15 +335,34 @@ public class TVBAdActivity extends HXBaseActivity {
     // TODO: 2020/2/4
     private void playMediaAd() {
 
-        //网络视频
-        String videoUrl = "https://v-cdn.zjol.com.cn/280443.mp4";
-//        String videoUrl = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
-        // String videoUrl = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
-//        Uri uri = Uri.parse(videoUrl);
-//        //设置视频路径
-//        mVideoView.setVideoURI(uri);
+//        if (Build.VERSION.SDK_INT >= 23) {
+//            int REQUEST_CODE_PERMISSION_STORAGE = 100;
+//            String[] permissions = {
+//                    Manifest.permission.READ_EXTERNAL_STORAGE,
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+//            };
+//
+//            for (String str : permissions) {
+//                if (this.checkSelfPermission(str) != PackageManager.PERMISSION_GRANTED) {
+//                    this.requestPermissions(permissions, REQUEST_CODE_PERMISSION_STORAGE);
+//                    return;
+//                }
+//            }
+//
+//            String videoUrl = Environment.getExternalStorageDirectory().getPath() + "/yewen.mp4";
+////        //设置视频路径
+//            mVideoView.setVideoPath(videoUrl);
+//        } else {
 
-        mVideoView.setVideoPath(videoUrl);
+            //网络视频
+//        String videoUrl = "https://v-cdn.zjol.com.cn/280443.mp4";
+//        String videoUrl = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
+            String videoUrl = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
+//        本地视频
+//            String videoUrl = Environment.getExternalStorageDirectory().getPath() + "/yewen.mp4";
+//        //设置视频路径
+            mVideoView.setVideoPath(videoUrl);
+//        }
 
     }
 

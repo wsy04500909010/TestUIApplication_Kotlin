@@ -33,8 +33,8 @@ public class MediaPlayerActivity extends Activity {
         final MediaPlayer player = new MediaPlayer();
 
         //设置数据数据源，也就播放文件地址，可以是网络地址
-//        String dataPath = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
-        String dataPath = "https://v-cdn.zjol.com.cn/280443.mp4";
+        String dataPath = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
+//        String dataPath = "https://v-cdn.zjol.com.cn/280443.mp4";
 //        String dataPath = Environment.getExternalStorageDirectory().getPath()+"/yewen.mp4";
         try {
             player.setDataSource(dataPath);
@@ -75,4 +75,7 @@ public class MediaPlayerActivity extends Activity {
             }
         });
     }
+
+
+
 }
