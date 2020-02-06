@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         iv_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                startActivity(new Intent(MainActivity.this,MediaPlayerActivity.class));
                 startActivity(new Intent(MainActivity.this,TVBAdActivity.class));
 //                startActivity(new Intent(MainActivity.this,CustomViewActivity.class));
             }

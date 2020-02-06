@@ -2,16 +2,18 @@ package com.wsy.testuiapplication;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
+import com.wsy.testuiapplication.ad.bean.ImageAdListBean;
 import com.wsy.testuiapplication.util.ImageUtil;
 import com.wsy.testuiapplication.util.Slog;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,15 +30,15 @@ public class TVBAdActivity extends HXBaseActivity {
     private ImageView mAdImage;
     private VideoView mVideoView;
 
-    private List<String> mAdImages;
+    private ImageAdListBean mImageAdBean;
     private boolean mFinished;
-
-    String imageDir;
-    String imagePath;
 
     //===================广告新逻辑开始
     //    消息类型-请求计时
     private static final int TYPE_REQUEST_AD_TIME = 2;
+    //    消息类型-图片加载完一张 切换到下一张
+    private static final int TYPE_IMAGE_AD_TIME_COUNT = 3;
+
 
     private static final int TYPE_MEDIAAD_STATUS_NO_RESPONSE = 0;
     private static final int TYPE_MEDIAAD_STATUS_success_RESPONSE = 1;
@@ -55,6 +57,10 @@ public class TVBAdActivity extends HXBaseActivity {
     //    视频广告是否获得响应
     private boolean mMediaAdResponse;
 
+    private int mCurrentAdImageIndex;
+
+    // 视频广告等待时间
+    private int mAdWaitTime;
 
 //    private LauncherColorListBean.ResultBean.ColorListBean mColor;
 
@@ -67,25 +73,28 @@ public class TVBAdActivity extends HXBaseActivity {
         mAdImage = (ImageView) findViewById(R.id.iv_ad);
         mVideoView = (VideoView) findViewById(R.id.videoView);
 
-        mAdImages = new ArrayList<>();
-        mAdImages.add("http://00.minipic.eastday.com/20170925/20170925141357_d41d8cd98f00b204e9800998ecf8427e_3.jpeg");
-//        mAdImages.add("http://img1.imgtn.bdimg.com/it/u=3216941516,4089665709&fm=214&gp=0.jpg");
-//        mAdImages.add("http://b.zol-img.com.cn/desk/bizhi/image/5/1920x1200/1409194293467.jpg");
-//        mAdImages.add(
-//                "http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1307/09/c1/23113144_1373337486840.jpg");
-//        mAdImages.add(
-//                "http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1308/05/c0/24160717_1375684275708.jpg");
-
-
-        imageDir = getFilesDir() + File.separator + "image_ad";
-        imagePath = imageDir + File.separator + "new_ad.jpg";
-
-        getIntentData();
+        prepareDatas();
+//        getIntentData();
 
         initHandler();
-        checkNewADImage();
 
     }
+
+    //准备假数据
+    private void prepareDatas() {
+
+        mImageAdBean = new ImageAdListBean();
+
+        List<String> mAdImages = new ArrayList<>();
+        mAdImages.add("http://00.minipic.eastday.com/20170925/20170925141357_d41d8cd98f00b204e9800998ecf8427e_3.jpeg");
+        mAdImages.add("http://img1.imgtn.bdimg.com/it/u=3216941516,4089665709&fm=214&gp=0.jpg");
+        mAdImages.add("http://b.zol-img.com.cn/desk/bizhi/image/5/1920x1200/1409194293467.jpg");
+
+        mImageAdBean.setDisplayTime(3000);
+        mImageAdBean.setImages(mAdImages);
+
+    }
+
 
     private void initHandler() {
 
@@ -101,6 +110,9 @@ public class TVBAdActivity extends HXBaseActivity {
                         //开始播放视频
                         mVideoView.start();
                         mAdImage.setVisibility(View.GONE);
+
+                        // 监测是否卡顿
+                        mHandler.postDelayed(runnable, 0);
                         break;
                     case TYPE_REQUEST_AD_TIME://计时到了5s
                         if (!mImageAdResponse) {
@@ -116,12 +128,44 @@ public class TVBAdActivity extends HXBaseActivity {
                             }
                         }
                         break;
+                    case TYPE_IMAGE_AD_TIME_COUNT:
+                        mCurrentAdImageIndex++;
+                        if (mCurrentAdImageIndex < mImageAdBean.getImages().size()) {
+//                            ImageUtil.showImage(TVBAdActivity.this, mImageAdBean.getImages().get(mCurrentAdImageIndex), mAdImage);
+//                            ImageUtil.showImage(TVBAdActivity.this, "http://b.zol-img.com.cn/desk/bizhi/image/5/1920x1200/1409194293467.jpg", mAdImage);
+
+                            Glide.with(TVBAdActivity.this).load("https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png").into(mAdImage);
+                            mHandler.sendEmptyMessageDelayed(TYPE_IMAGE_AD_TIME_COUNT, mImageAdBean.getDisplayTime());
+                        } else {
+                            imageAdFinish();
+                        }
+                        break;
                     default:
                         break;
                 }
             }
         };
     }
+
+    int old_duration = 0;
+    Runnable runnable = new Runnable() {
+        public void run() {
+            int duration = mVideoView.getCurrentPosition();
+            if (old_duration == duration && mVideoView.isPlaying()) {
+
+                mAdWaitTime++;
+                if (mAdWaitTime == 10) {
+                    mVideoView.stopPlayback();
+                    startTVBPage();
+                }
+            } else {
+                mAdWaitTime = 0;
+            }
+            old_duration = duration;
+
+            mHandler.postDelayed(runnable, 1000);
+        }
+    };
 
 
     private void getIntentData() {
@@ -153,18 +197,38 @@ public class TVBAdActivity extends HXBaseActivity {
                 return true;
             }
         });
+
+
+//        mVideoView.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+//            @Override
+//            public boolean onInfo(MediaPlayer mediaPlayer, int what, int extra) {
+//                switch (what) {
+//                    case MediaPlayer.MEDIA_INFO_BUFFERING_START:
+//
+//                        break;
+//                    case MediaPlayer.MEDIA_INFO_BUFFERING_END:
+//
+//                        break;
+//                }
+//
+//                return false;
+//            }
+//        });
+
         //加载数据开始干3件事
         //1、计时
-        mHandler.sendEmptyMessageDelayed(TYPE_REQUEST_AD_TIME, 5000);
+//        mHandler.sendEmptyMessageDelayed(TYPE_REQUEST_AD_TIME, 5000);
 
         //2、发送图片广告请求
-        requestForImageAd(true);
+//        requestForImageAd(true);
         //3、发送视频广告请求
-        requestForMediaAd(false);
+//        requestForMediaAd(false);
+//        requestForMediaAd(true);
 
 
         //网络视频
-        String videoUrl = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
+//        String videoUrl = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
+        String videoUrl = Environment.getExternalStorageDirectory().getPath() + "/yewen.mp4";
 //        String videoUrl = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
         Uri uri = Uri.parse(videoUrl);
         //设置视频路径
@@ -229,11 +293,29 @@ public class TVBAdActivity extends HXBaseActivity {
 
     // TODO: 2020/2/4  
     private void playImageAd() {
+        List<String> images = mImageAdBean.getImages();
+        if (images != null && images.size() > 0) {
+            ImageUtil.showImage(this, mImageAdBean.getImages().get(mCurrentAdImageIndex), mAdImage);
+            mHandler.sendEmptyMessageDelayed(TYPE_IMAGE_AD_TIME_COUNT, mImageAdBean.getDisplayTime());
+
+        } else {//没有需要显示的图片直接结束流程
+            imageAdFinish();
+        }
 
     }
 
     // TODO: 2020/2/4
     private void playMediaAd() {
+
+        //网络视频
+        String videoUrl = "https://v-cdn.zjol.com.cn/280443.mp4";
+//        String videoUrl = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
+        // String videoUrl = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
+//        Uri uri = Uri.parse(videoUrl);
+//        //设置视频路径
+//        mVideoView.setVideoURI(uri);
+
+        mVideoView.setVideoPath(videoUrl);
 
     }
 
@@ -252,10 +334,5 @@ public class TVBAdActivity extends HXBaseActivity {
 //        mHandler.removeCallbacksAndMessages(null);
     }
 
-
-    private void checkNewADImage() {
-        // TODO: 2020-01-09 这里应该通过接口确定是否有新广告图片,这里我们当做有 直接操作下载
-
-    }
 
 }

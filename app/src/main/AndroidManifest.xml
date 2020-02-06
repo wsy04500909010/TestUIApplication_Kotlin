@@ -35,6 +35,7 @@
         <activity android:name=".kotlin.CollectionActivity"></activity>
 
         <activity android:name=".TVBAdActivity" />
+        <activity android:name=".MediaPlayerActivity" />
 
         <service
             android:name=".service.MyFirebaseMessagingService"
