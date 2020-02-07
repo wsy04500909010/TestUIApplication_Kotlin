@@ -121,7 +121,6 @@ public class TVBAdActivity extends HXBaseActivity {
                     case AD_ERROR:
                         mNextAdMediaIndex++;
                         mRunableFlag = false;
-
                         if (mNextAdMediaIndex < mMediaAdList.size()) {
                             mVideoView.setVideoPath(mMediaAdList.get(mNextAdMediaIndex).getUrl());
                         } else {
@@ -164,10 +163,12 @@ public class TVBAdActivity extends HXBaseActivity {
                     case TYPE_IMAGE_AD_TIME_COUNT:
                         mNextAdImageIndex++;
                         if (mNextAdImageIndex < mImageAdList.size()) {
-                            ImageUtil.showImage(TVBAdActivity.this, mImageAdList.get(mNextAdImageIndex).getUrl(), mAdImage);
+                            ImageUtil.showImage(TVBAdActivity.this, mImageAdList.get(mNextAdImageIndex).getUrl(),
+                                    mAdImage);
 //                            ImageUtil.showImage(TVBAdActivity.this, "http://b.zol-img.com.cn/desk/bizhi/image/5/1920x1200/1409194293467.jpg", mAdImage);
 //                            Glide.with(TVBAdActivity.this).load("https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png").into(mAdImage);
-                            mHandler.sendEmptyMessageDelayed(TYPE_IMAGE_AD_TIME_COUNT, Long.parseLong(mImageAdList.get(mNextAdImageIndex).getDuration()));
+                            mHandler.sendEmptyMessageDelayed(TYPE_IMAGE_AD_TIME_COUNT,
+                                    Long.parseLong(mImageAdList.get(mNextAdImageIndex).getDuration()));
                         } else {
                             imageAdFinish();
                         }
@@ -203,20 +204,15 @@ public class TVBAdActivity extends HXBaseActivity {
 
             mRootLayout.addView(mVideoView);
         }
-
-
-        // 准备图片假数据
+        // 准备广告假数据
         prepareDatas();
 //        getIntentData();
-
         initHandler();
 
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String[] permission,
-                                           int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permission, int[] grantResults) {
         //requestCode就是requestPermissions()的第三个参数
         //permission就是requestPermissions()的第二个参数
         //grantResults是结果，0调试通过，-1表示拒绝
@@ -251,10 +247,12 @@ public class TVBAdActivity extends HXBaseActivity {
         mImageAdList = new ArrayList<>();
 
         AdListBean adListBean1 = new AdListBean();
-        adListBean1.setUrl("http://00.minipic.eastday.com/20170925/20170925141357_d41d8cd98f00b204e9800998ecf8427e_3.jpeg");
+        adListBean1.setUrl(
+                "http://00.minipic.eastday.com/20170925/20170925141357_d41d8cd98f00b204e9800998ecf8427e_3.jpeg");
         adListBean1.setDuration("3");
         AdListBean adListBean2 = new AdListBean();
-        adListBean2.setUrl("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2026218730,2462529383&fm=11&gp=0.jpg");
+        adListBean2.setUrl(
+                "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2026218730,2462529383&fm=11&gp=0.jpg");
         adListBean2.setDuration("3");
         AdListBean adListBean3 = new AdListBean();
         adListBean3.setUrl("http://b.zol-img.com.cn/desk/bizhi/image/5/1920x1200/1409194293467.jpg");
@@ -268,9 +266,10 @@ public class TVBAdActivity extends HXBaseActivity {
         mMediaAdList = new ArrayList<>();
 
         AdListBean adListBean4 = new AdListBean();
-        adListBean4.setUrl("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
+        adListBean4.setUrl("http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4");
         AdListBean adListBean5 = new AdListBean();
-        adListBean5.setUrl("http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4");
+//        adListBean5.setUrl("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
+        adListBean5.setUrl("http://vjs.zencdn.net/v/oceans.mp4");
 
         mMediaAdList.add(adListBean4);
         mMediaAdList.add(adListBean5);
@@ -334,23 +333,6 @@ public class TVBAdActivity extends HXBaseActivity {
                 return true;
             }
         });
-
-
-//        mVideoView.setOnInfoListener(new MediaPlayer.OnInfoListener() {
-//            @Override
-//            public boolean onInfo(MediaPlayer mediaPlayer, int what, int extra) {
-//                switch (what) {
-//                    case MediaPlayer.MEDIA_INFO_BUFFERING_START:
-//
-//                        break;
-//                    case MediaPlayer.MEDIA_INFO_BUFFERING_END:
-//
-//                        break;
-//                }
-//
-//                return false;
-//            }
-//        });
 
         //加载数据开始干3件事
         //1、计时
@@ -420,11 +402,11 @@ public class TVBAdActivity extends HXBaseActivity {
         }
     }
 
-    // TODO: 2020/2/4  
     private void playImageAd() {
         if (mImageAdList != null && mImageAdList.size() > 0) {
             ImageUtil.showImage(this, mImageAdList.get(0).getUrl(), mAdImage);
-            mHandler.sendEmptyMessageDelayed(TYPE_IMAGE_AD_TIME_COUNT, Long.parseLong(mImageAdList.get(0).getDuration()));
+            mHandler.sendEmptyMessageDelayed(TYPE_IMAGE_AD_TIME_COUNT,
+                    Long.parseLong(mImageAdList.get(0).getDuration()));
 
         } else {//没有需要显示的图片直接结束流程
             imageAdFinish();
@@ -432,7 +414,6 @@ public class TVBAdActivity extends HXBaseActivity {
 
     }
 
-    // TODO: 2020/2/4
     private void playMediaAd() {
 
 //        if (Build.VERSION.SDK_INT >= 23) {
@@ -466,9 +447,8 @@ public class TVBAdActivity extends HXBaseActivity {
         if (mMediaAdList != null && mMediaAdList.size() > 0) {
             String videoUrl = mMediaAdList.get(0).getUrl();
             mVideoView.setVideoPath(videoUrl);
+
         }
-
-
 //        }
 
     }
