@@ -3,10 +3,10 @@ package com.wsy.testuiapplication;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -37,6 +37,8 @@ public class TVBAdActivity extends HXBaseActivity {
     private boolean mFinished;
 
     //===================广告新逻辑开始
+    private ConstraintLayout mRootLayout;
+
     //    消息类型-请求计时
     private static final int TYPE_REQUEST_AD_TIME = 2;
     //    消息类型-图片加载完一张 切换到下一张
@@ -75,8 +77,26 @@ public class TVBAdActivity extends HXBaseActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_tvb_ad);
+
+        mRootLayout = findViewById(R.id.root_layout);
         mAdImage = (ImageView) findViewById(R.id.iv_ad);
-        mVideoView = (VideoView) findViewById(R.id.videoView);
+
+        //动态添加 防止泄露
+        if (mVideoView == null) {
+            mVideoView = new VideoView(DFApplication.getInstance().getApplicationContext());
+            mVideoView.setId(R.id.videoview);
+
+            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(0, 0);
+            layoutParams.startToStart = R.id.root_layout;
+            layoutParams.endToEnd = R.id.root_layout;
+            layoutParams.topToTop = R.id.root_layout;
+            layoutParams.bottomToBottom = R.id.root_layout;
+
+            mVideoView.setLayoutParams(layoutParams);
+            mVideoView.setTag("videoview");
+
+            mRootLayout.addView(mVideoView);
+        }
 
 
         // 准备图片假数据
@@ -354,14 +374,14 @@ public class TVBAdActivity extends HXBaseActivity {
 //            mVideoView.setVideoPath(videoUrl);
 //        } else {
 
-            //网络视频
+        //网络视频
 //        String videoUrl = "https://v-cdn.zjol.com.cn/280443.mp4";
 //        String videoUrl = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
-            String videoUrl = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
+        String videoUrl = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
 //        本地视频
 //            String videoUrl = Environment.getExternalStorageDirectory().getPath() + "/yewen.mp4";
 //        //设置视频路径
-            mVideoView.setVideoPath(videoUrl);
+        mVideoView.setVideoPath(videoUrl);
 //        }
 
     }
@@ -378,7 +398,16 @@ public class TVBAdActivity extends HXBaseActivity {
 //        mMediaPlayer.reset();
 //        mMediaPlayer.release();
 //        mMediaPlayer = null;
-//        mHandler.removeCallbacksAndMessages(null);
+
+        mVideoView.suspend();
+        mVideoView.setOnErrorListener(null);
+        mVideoView.setOnPreparedListener(null);
+        mVideoView.setOnCompletionListener(null);
+        mRootLayout.removeView(mRootLayout.findViewWithTag("videoview"));
+
+        mVideoView = null;
+
+        mHandler.removeCallbacksAndMessages(null);
     }
 
 
