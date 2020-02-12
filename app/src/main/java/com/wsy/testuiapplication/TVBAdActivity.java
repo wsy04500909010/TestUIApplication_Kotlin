@@ -10,12 +10,12 @@ import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.wsy.testuiapplication.ad.bean.AdListBean;
 import com.wsy.testuiapplication.util.ImageUtil;
 import com.wsy.testuiapplication.util.Slog;
 import com.wsy.testuiapplication.util.ToastUtil;
+import com.wsy.testuiapplication.view.CustomVideoView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,7 +34,7 @@ public class TVBAdActivity extends HXBaseActivity {
     private static final int AD_COMPLETE = 2;
 
     private ImageView mAdImage;
-    private VideoView mVideoView;
+    private CustomVideoView mVideoView;
 
     private List<AdListBean> mImageAdList;
     private List<AdListBean> mMediaAdList;
@@ -190,7 +190,7 @@ public class TVBAdActivity extends HXBaseActivity {
 
         //动态添加 防止泄露
         if (mVideoView == null) {
-            mVideoView = new VideoView(DFApplication.getInstance().getApplicationContext());
+            mVideoView = new CustomVideoView(DFApplication.getInstance().getApplicationContext());
             mVideoView.setId(R.id.videoview);
 
             ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(0, 0);
