@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -23,6 +25,9 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.wsy.testuiapplication.util.MD5Util;
 import com.wsy.testuiapplication.util.Slog;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MainActivity";
@@ -31,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
     private ImageView close, iv_logo;
     private TextView mVersion;
     private DFRoundTextView mKotlinBtn;
+
+    private Timer timer;
+    private int count;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseInstanceId.getInstance().getInstanceId()
-                        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(
+                        new OnCompleteListener<InstanceIdResult>() {
                             @Override
                             public void onComplete(@NonNull Task<InstanceIdResult> task) {
                                 if (!task.isSuccessful()) {
@@ -103,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                startActivity(new Intent(MainActivity.this,MediaPlayerActivity.class));
-                startActivity(new Intent(MainActivity.this,TVBAdActivity.class));
+                startActivity(new Intent(MainActivity.this, TVBAdActivity.class));
 //                startActivity(new Intent(MainActivity.this,CustomViewActivity.class));
             }
         });
@@ -116,11 +125,43 @@ public class MainActivity extends AppCompatActivity {
         mKotlinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,KotlinMainActivity.class));
+                startActivity(new Intent(MainActivity.this, KotlinMainActivity.class));
             }
         });
 
         Log.d("MD5", MD5Util.Companion.getUserMD5Str("siye.wang@net263.com"));
+
+
+        timer = new Timer(true);
+        timer.schedule(timerTask, 0, 1000); //延时1000ms后执行，1000ms执行一次
+
+    }
+
+    TimerTask timerTask = new TimerTask() {
+        public void run() {
+            handler.sendEmptyMessage(1);
+        }
+    };
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                //回到主线程执行结束操作
+                count++;
+                Log.e("count=====", count + "");
+
+                if (count == 5) {
+                    timer.cancel();
+                }
+            }
+        }
+    };
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancel();
     }
 
     private float dealSize() {
@@ -142,9 +183,8 @@ public class MainActivity extends AppCompatActivity {
     public static int getLocalVersion(Context ctx) {
         int localVersion = 0;
         try {
-            PackageInfo packageInfo = ctx.getApplicationContext()
-                    .getPackageManager()
-                    .getPackageInfo(ctx.getPackageName(), 0);
+            PackageInfo packageInfo = ctx.getApplicationContext().getPackageManager().getPackageInfo(
+                    ctx.getPackageName(), 0);
             localVersion = packageInfo.versionCode;
             Log.d("TAG", "本软件的版本号。。" + localVersion);
         } catch (PackageManager.NameNotFoundException e) {

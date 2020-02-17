@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--attr-->
+    <declare-styleable name="TitleIndicator">
+        <attr name="text_color" format="reference" />
+        <attr name="select_text_size" format="dimension" />
+        <attr name="underline_show" format="boolean" />
+        <attr name="underline_selectedColor" format="color" />
+        <attr name="underline_height" format="dimension" />
+        <attr name="underline_padding_bottom" format="dimension" />
+        <attr name="bold_on_choose" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="CirclePageIndicator">
+        <!-- Whether or not the indicators should be centered. -->
+        <attr name="centered" />
+        <!-- Color of the unselected lines that represent the pages. -->
+        <attr name="unselectedColor" />
+        <!-- Color of the selected line that represents the current page. -->
+        <attr name="selectedColor" />
+        <!-- Width of each indicator line. -->
+        <attr name="lineWidth" />
+        <!-- Width of each indicator line's stroke. -->
+        <attr name="strokeWidth" />
+        <!-- Width of the gap between each indicator line. -->
+        <attr name="gapWidth" />
+        <!-- View background -->
+        <attr name="android:background" />
+    </declare-styleable>
+
+    <declare-styleable name="TabPageIndicator">
+        <attr name="android:background" format="color" />
+        <attr name="textColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="LinePageIndicator">
+        <!-- Whether or not the indicators should be centered. -->
+        <attr name="centered" />
+        <!-- Color of the unselected lines that represent the pages. -->
+        <attr name="unselectedColor" />
+        <!-- Color of the selected line that represents the current page. -->
+        <attr name="selectedColor" />
+        <!-- Width of each indicator line. -->
+        <attr name="lineWidth" format="dimension" />
+        <!-- Width of each indicator line's stroke. -->
+        <attr name="strokeWidth" />
+        <!-- Width of the gap between each indicator line. -->
+        <attr name="gapWidth" format="dimension" />
+        <!-- View background -->
+        <attr name="android:background" />
+    </declare-styleable>
+
+    <declare-styleable name="UnderlinePageIndicator">
+        <!-- Whether or not the selected indicator fades. -->
+        <attr name="fades" format="boolean" />
+        <!-- Length of the delay to fade the indicator. -->
+        <attr name="fadeDelay" format="integer" />
+        <!-- Length of the indicator fade to transparent. -->
+        <attr name="fadeLength" format="integer" />
+        <!-- Color of the selected line that represents the current page. -->
+        <attr name="selectedColor" format="color" />
+        <!-- View background -->
+        <attr name="android:background" />
+    </declare-styleable>
+
+    <style name="Widget"></style>
+
+    <!--default value-->
+    <color name="default_circle_indicator_selected_color">#F95862</color>
+    <color name="default_circle_indicator_unselected_color">#CCCCCC</color>
+    <dimen name="default_circle_indicator_width">20dp</dimen>
+    <dimen name="default_circle_indicator_gap_width">5dp</dimen>
+    <dimen name="default_circle_indicator_stroke_width">4dp</dimen>
+    <dimen name="default_circle_indicator_radius">2dp</dimen>
+    <bool name="default_circle_indicator_centered">true</bool>
+
+    <dimen name="default_line_indicator_line_width">12dp</dimen>
+    <dimen name="default_line_indicator_gap_width">4dp</dimen>
+    <dimen name="default_line_indicator_stroke_width">1dp</dimen>
+    <color name="default_line_indicator_selected_color">#FF33B5E5</color>
+    <color name="default_line_indicator_unselected_color">#FFBBBBBB</color>
+    <bool name="default_line_indicator_centered">true</bool>
+
+    <bool name="default_underline_indicator_fades">true</bool>
+    <integer name="default_underline_indicator_fade_delay">300</integer>
+    <integer name="default_underline_indicator_fade_length">400</integer>
+    <color name="default_underline_indicator_selected_color">#F95862</color>
+
+</resources>
