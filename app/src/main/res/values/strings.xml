@@ -416,4 +416,9 @@
     <string name="error_activitycode_used_device">设备已使用过此活动码</string>
     <string name="error_activitycode_used_again">此活动码不可重复使用</string>
 
+
+    <!--    launcher-->
+    <string name="watch_now">立即观看</string>
+    <string name="watch_first">看看再说</string>
+
 </resources>

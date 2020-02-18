@@ -83,6 +83,7 @@ public class DFLauncherViewpager extends LinearLayout implements ViewPager.OnPag
         initHandler();
 
         setData(mBannerList);
+        setBannerShowing(true);
     }
 
     protected void initData() {
@@ -93,10 +94,7 @@ public class DFLauncherViewpager extends LinearLayout implements ViewPager.OnPag
         mAdapter = new ViewPagerAdapter();
 
         prepareData();
-
         mAdapter.setData(mImageViews);
-
-
     }
 
     private void prepareData() {
@@ -123,13 +121,6 @@ public class DFLauncherViewpager extends LinearLayout implements ViewPager.OnPag
         mPlaceHolder = findViewById(R.id.banner_placeholder);
         mViewPager = findViewById(R.id.banner_viewpager);
         mIndicator = findViewById(R.id.banner_indicator);
-//        int width = DensityUtil.getScreenWidth(getContext());
-//        int height = 9 * width / 16;
-//        RelativeLayout.LayoutParams placeHolderParams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-//                height - DensityUtil.dip2px(getContext(), 20));
-//        placeHolderParams.setMargins(DensityUtil.dip2px(getContext(), 20), 0, DensityUtil.dip2px(getContext(), 20),
-//                DensityUtil.dip2px(getContext(), 20));
-//        mPlaceHolder.setLayoutParams(placeHolderParams);
         RelativeLayout.LayoutParams bannerParams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT);
         mViewPager.setLayoutParams(bannerParams);

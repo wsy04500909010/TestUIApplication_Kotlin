@@ -13,5 +13,58 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.wsy.testuiapplication.DFRoundTextView
+        android:id="@+id/tv_signin_activity"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/btn_signup_height"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="@dimen/btn_signup_margin_bottom"
+        android:gravity="center"
+        android:text="@string/user_login_international"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/size_tv_btn"
+        app:df_round_text_color="@color/colorPrimary"
+        app:df_round_text_conner="@dimen/btn_corner_in_login"
+        app:df_round_text_content_color="#00000000"
+        app:df_round_text_stock="@dimen/btn_border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.87" />
+
+    <com.wsy.testuiapplication.DFRoundTextView
+        android:id="@+id/tv_watch_now"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/btn_login_height"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="@dimen/btn_login_margin_bottom"
+        android:enabled="true"
+        android:gravity="center"
+        android:text="@string/watch_now"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_tv_btn"
+        app:df_round_text_color="@color/colorPrimary"
+        app:df_round_text_conner="@dimen/btn_corner_in_login"
+        app:layout_constraintBottom_toTopOf="@id/tv_signin_activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_watch_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/watch_first"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_signin_activity"
+
+        />
+
 
 </android.support.constraint.ConstraintLayout>
