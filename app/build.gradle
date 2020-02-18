@@ -44,9 +44,9 @@ dependencies {
 
     // add SDKs for desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
-    implementation 'com.google.firebase:firebase-core:16.0.8'
-    implementation 'com.google.firebase:firebase-messaging:17.6.0'
-    implementation 'com.firebase:firebase-jobdispatcher:0.5.0'
+//    implementation 'com.google.firebase:firebase-core:16.0.8'
+//    implementation 'com.google.firebase:firebase-messaging:17.6.0'
+//    implementation 'com.firebase:firebase-jobdispatcher:0.5.0'
 
     // kotlin 相关
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -57,7 +57,7 @@ dependencies {
 
 
 }
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
 repositories {
     mavenCentral()
 }  // Google Play services Gradle plugin
