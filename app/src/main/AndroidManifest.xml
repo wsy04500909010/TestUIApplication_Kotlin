@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".DFApplication"
@@ -19,6 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_security_config">
+
+        <!-- FileProvider配置访问路径，适配7.0及其以上 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/custom_filepaths" />
+        </provider>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -35,6 +48,7 @@
         <activity android:name=".KotlinMainActivity"></activity>
         <activity android:name=".kotlin.KotlinAPIActivity"></activity>
         <activity android:name=".kotlin.CollectionActivity"></activity>
+        <activity android:name=".kotlin.ChangeHeadIconActivity"></activity>
         <activity android:name=".launcher.ui.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
