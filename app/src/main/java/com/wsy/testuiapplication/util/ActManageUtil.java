@@ -2,7 +2,9 @@ package com.wsy.testuiapplication.util;
 
 import android.app.Activity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -46,6 +48,29 @@ public class ActManageUtil {
                     if (act != null && !act.isFinishing())
                         act.finish();
                 }
+            }
+        }
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(0);
+    }
+
+    private static List<Activity> aList = new ArrayList<>();
+
+    public static void addActivity(Activity activity){
+        aList.add(activity);
+    }
+    public static void removeActivity(Activity activity){
+        aList.remove(activity);
+    }
+
+//    public static int getActivitySize(){
+//        return aList.size();
+//    }
+
+    public static void exit(){
+        for (Activity activity : aList) {
+            if (!activity.isFinishing()){
+                activity.finish();
             }
         }
         android.os.Process.killProcess(android.os.Process.myPid());

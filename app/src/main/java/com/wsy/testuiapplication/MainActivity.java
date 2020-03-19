@@ -6,10 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,11 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 import com.wsy.testuiapplication.util.Slog;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private ImageView close, iv_logo;
     private TextView mVersion;
     private DFRoundTextView mKotlinBtn;
+
+    private Timer timer;
+    private int count;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,24 +68,24 @@ public class MainActivity extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseInstanceId.getInstance().getInstanceId()
-                        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                                if (!task.isSuccessful()) {
-                                    Log.w(TAG, "getInstanceId failed", task.getException());
-                                    return;
-                                }
-
-                                // Get new Instance ID token
-                                String token = task.getResult().getToken();
-
-                                // Log and toast
-//                                String msg = getString(R.string.msg_token_fmt, token);
-//                                Log.d(TAG, msg);
-                                Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
-                            }
-                        });
+//                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(
+//                        new OnCompleteListener<InstanceIdResult>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+//                                if (!task.isSuccessful()) {
+//                                    Log.w(TAG, "getInstanceId failed", task.getException());
+//                                    return;
+//                                }
+//
+//                                // Get new Instance ID token
+//                                String token = task.getResult().getToken();
+//
+//                                // Log and toast
+////                                String msg = getString(R.string.msg_token_fmt, token);
+////                                Log.d(TAG, msg);
+//                                Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
             }
         });
 
@@ -103,7 +105,9 @@ public class MainActivity extends AppCompatActivity {
         iv_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,CustomViewActivity.class));
+//                startActivity(new Intent(MainActivity.this,MediaPlayerActivity.class));
+                startActivity(new Intent(MainActivity.this, TVBAdActivity.class));
+//                startActivity(new Intent(MainActivity.this,CustomViewActivity.class));
             }
         });
 
@@ -119,6 +123,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        timer = new Timer(true);
+        timer.schedule(timerTask, 0, 1000); //延时1000ms后执行，1000ms执行一次
+
+    }
+
+    TimerTask timerTask = new TimerTask() {
+        public void run() {
+            handler.sendEmptyMessage(1);
+        }
+    };
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                //回到主线程执行结束操作
+                count++;
+                Log.e("count=====", count + "");
+
+                if (count == 5) {
+                    timer.cancel();
+                }
+            }
+        }
+    };
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancel();
     }
 
     private float dealSize() {

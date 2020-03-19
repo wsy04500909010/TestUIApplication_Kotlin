@@ -23,6 +23,7 @@
 
     <declare-styleable name="DFRoundTextView">
         <attr name="df_round_text_color" format="color" />
+        <attr name="df_round_text_content_color" format="color" />
         <attr name="df_round_text_innerPadding" format="dimension" />
         <attr name="df_round_text_conner" format="dimension" />
         <attr name="df_round_text_stock" format="dimension" />
