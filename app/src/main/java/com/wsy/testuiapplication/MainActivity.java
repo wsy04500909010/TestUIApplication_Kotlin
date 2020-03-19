@@ -22,7 +22,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.wsy.testuiapplication.util.MD5Util;
 import com.wsy.testuiapplication.util.Slog;
 
 public class MainActivity extends AppCompatActivity {
@@ -120,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Log.d("MD5", MD5Util.Companion.getUserMD5Str("siye.wang@net263.com"));
     }
 
     private float dealSize() {
