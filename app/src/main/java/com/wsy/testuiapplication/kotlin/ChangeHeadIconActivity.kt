@@ -1,8 +1,11 @@
 package com.wsy.testuiapplication.kotlin
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -11,14 +14,14 @@ import android.provider.MediaStore
 import android.support.annotation.Nullable
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AppCompatActivity
-import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.wsy.testuiapplication.util.FileUtil
+import com.wsy.testuiapplication.R
 import kotlinx.android.synthetic.main.activity_change_head_icon.*
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,37 +32,52 @@ import java.util.*
  */
 class ChangeHeadIconActivity : AppCompatActivity() {
 
-    val RC_TAKE_PHOTO = 1
-    val RC_CHOOSE_PHOTO = 2
+    private val RC_TAKE_PHOTO = 1
+    private val RC_CHOOSE_PHOTO = 2
+    private val REQUEST_CROP = 3
 
-    var mImage: ImageView? = null
-    var mButton: Button? = null
+    private var mImage: ImageView? = null
+    private var mButton: Button? = null
+    private var mButtonGallery: Button? = null
 
-    var mTempPhotoPath: String? = null
-    var imageUri: Uri? = null
+    private var mTempPhotoPath: String? = null
+
+    private var mCutUri: Uri? = null //// 图片裁剪时返回的uri
+
+    private var imageFile1: File? = null
+    private var imageUri: Uri? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.wsy.testuiapplication.R.layout.activity_change_head_icon)
+        setContentView(R.layout.activity_change_head_icon)
 
-        mImage = findViewById(com.wsy.testuiapplication.R.id.iv_head_icon)
-        mButton = findViewById(com.wsy.testuiapplication.R.id.btn_change)
+        mImage = findViewById(R.id.iv_head_icon)
+        mButton = findViewById(R.id.btn_change)
+        mButtonGallery = findViewById(R.id.btn_gallery)
 
         initView()
-
     }
 
     fun initView() {
         mButton?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 if (hasPermission()) {
-                    //                    choosePhoto()
                     takePhoto()
                 } else {
                     requestPermission()
                 }
             }
+        })
 
+        mButtonGallery?.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                if (hasPermission()) {
+                    choosePhoto()
+                } else {
+                    requestPermission()
+                }
+            }
         })
     }
 
@@ -115,9 +133,7 @@ class ChangeHeadIconActivity : AppCompatActivity() {
         startActivityForResult(intentToPickPic, RC_CHOOSE_PHOTO)
     }
 
-    /**
-     *
-     */
+
     private fun takePhoto() {
 
         //        File imageFile = null;
@@ -147,10 +163,10 @@ class ChangeHeadIconActivity : AppCompatActivity() {
         //        imageUri = FileProvider.getUriForFile(this, "com.wsy.testuiapplication.provider", photoFile)
 
 
-        var imageFile: File? = null
-        var storagePath: String? = null
-        var storageDir: File? = null
-        var imageUri: Uri? = null
+        var imageFile: File?
+        var storagePath: String?
+        var storageDir: File?
+
 
         var timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
 
@@ -159,38 +175,212 @@ class ChangeHeadIconActivity : AppCompatActivity() {
         storageDir.mkdirs()
         imageFile = File.createTempFile(timeStamp, ".jpg", storageDir)
 
+        imageFile1 = imageFile
+
         mTempPhotoPath = imageFile.absolutePath
 
-        imageUri = FileProvider.getUriForFile(this, "com.wsy.testuiapplication.provider", imageFile)
+        //        imageUri = FileProvider.getUriForFile(this, "com.wsy.testuiapplication.provider", imageFile)
 
+        imageUri = getUriForFile(imageFile)
 
         intentToTakePhoto.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
         startActivityForResult(intentToTakePhoto, RC_TAKE_PHOTO)
     }
 
+    // 从file中获取uri
+    // 7.0及以上使用的uri是contentProvider content://com.rain.takephotodemo.FileProvider/images/photo_20180824173621.jpg
+    // 6.0使用的uri为file:///storage/emulated/0/take_photo/photo_20180824171132.jpg
+    fun getUriForFile(file: File): Uri {
+        var uri: Uri?
+        if (file == null) {
+            throw  NullPointerException();
+        }
+        if (Build.VERSION.SDK_INT >= 24) {
+            uri = FileProvider.getUriForFile(getApplicationContext(), "com.wsy.testuiapplication.provider",
+                    file);
+        } else {
+            uri = Uri.fromFile(file);
+        }
+        return uri;
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, @Nullable data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK){
+            when (requestCode) {
+                RC_CHOOSE_PHOTO -> {
+                    //                val uri = data!!.data
+                    //                val filePath = FileUtil.getFilePathByUri(this, uri)
+                    //
+                    //                if (!TextUtils.isEmpty(filePath)) {
+                    //                    //                    val requestOptions1 = RequestOptions().skipMemoryCache(true)
+                    //                    //                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    //                    //将照片显示在 ivImage上
+                    //                    Glide.with(this).load(filePath).into(iv_head_icon)
+                    //                }
+                    if (data != null) {
+                        val uri = data!!.data
+                        cropPhoto(uri, false)
+                    } else {
+                        cropPhoto(imageUri, false)
+                    }
 
-        when (requestCode) {
-            RC_CHOOSE_PHOTO -> {
-                val uri = data!!.data
-                val filePath = FileUtil.getFilePathByUri(this, uri)
+                }
+                RC_TAKE_PHOTO -> {
 
-                if (!TextUtils.isEmpty(filePath)) {
-                    //                    val requestOptions1 = RequestOptions().skipMemoryCache(true)
-                    //                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    //将照片显示在 ivImage上
-                    Glide.with(this).load(filePath).into(iv_head_icon)
+                    if (data != null) {
+                        val uri = data!!.data
+                        cropPhoto(uri, true)
+                    } else {
+                        cropPhoto(imageUri, true)
+                    }
+
+                    //                val requestOptions = RequestOptions().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE)
+                    //将图片显示在ivImage上
+                    //                Glide.with(this).load(mTempPhotoPath).into(iv_head_icon)
+                }
+                REQUEST_CROP -> {
+                    //                if (data != null) {
+                    //                    val uri = data.data
+                    //                    val filePath = FileUtil.getFilePathByUri(this, uri)
+                    //
+                    //                    if (!TextUtils.isEmpty(filePath)) {
+                    //                        //                    val requestOptions1 = RequestOptions().skipMemoryCache(true)
+                    //                        //                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    //                        //将照片显示在 ivImage上
+                    //                        Glide.with(this).load(filePath).into(iv_head_icon)
+                    //                    }
+                    //                }
+
+
+                    var bitmap: Bitmap
+
+                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(mCutUri));
+                    var baos = ByteArrayOutputStream()
+
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+
+                    var bytes: ByteArray = baos.toByteArray()
+                    //                byte[] bytes = baos . toByteArray ();
+
+                    Glide.with(this).load(bytes).into(iv_head_icon);
+
+                    //                Glide.with(this).load(bitmap).into(iv_head_icon)
+
+
                 }
             }
-            RC_TAKE_PHOTO -> {
-
-                //                val requestOptions = RequestOptions().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE)
-                //将图片显示在ivImage上
-                Glide.with(this).load(mTempPhotoPath).into(iv_head_icon)
-            }
         }
+
     }
+
+    // 图片裁剪
+    fun cropPhoto(uri: Uri?, fromCapture: Boolean) {
+        var intent = Intent("com.android.camera.action.CROP") //打开系统自带的裁剪图片的intent
+
+        // 注意一定要添加该项权限，否则会提示无法裁剪
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+        intent.setDataAndType(uri, "image/*")
+        intent.putExtra("scale", true)
+
+        // 设置裁剪区域的宽高比例
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+
+        // 设置裁剪区域的宽度和高度
+        intent.putExtra("outputX", 600);
+        intent.putExtra("outputY", 600);
+
+        // 取消人脸识别
+        intent.putExtra("noFaceDetection", true);
+        // 图片输出格式
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+
+        // 若为false则表示不返回数据
+        intent.putExtra("return-data", false);
+
+
+        // 指定裁剪完成以后的图片所保存的位置,pic info显示有延时
+        if (fromCapture) {
+            // 如果是使用拍照，那么原先的uri和最终目标的uri一致,注意这里的uri必须是Uri.fromFile生成的
+            mCutUri = Uri.fromFile(imageFile1)
+            //            mCutUri = Uri.fromFile(imgFile);
+        } else { // 从相册中选择，那么裁剪的图片保存在take_photo中
+            var time = SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA).format(Date())
+            var fileName = "photo_" + time;
+            var mCutFile = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES).absolutePath, fileName + ".jpg")
+            //            var mCutFile = File(Environment.getExternalStorageDirectory().absolutePath + "/take_photo", fileName + ".jpeg")
+            if (!mCutFile.getParentFile().exists()) {
+                mCutFile.getParentFile().mkdirs();
+            }
+            mCutUri = Uri.fromFile(mCutFile);
+        }
+
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, mCutUri);
+        //        Toast.makeText(this, "剪裁图片", Toast.LENGTH_SHORT).show();
+
+        // 以广播方式刷新系统相册，以便能够在相册中找到刚刚所拍摄和裁剪的照片
+        var intentBc = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        intentBc.setData(uri);
+        this.sendBroadcast(intentBc);
+
+        startActivityForResult(intent, REQUEST_CROP);
+
+    }
+
+
+    //    private void cropPhoto(Uri uri, boolean fromCapture)
+    //    {
+    //        Intent intent = new Intent("com.android.camera.action.CROP"); //打开系统自带的裁剪图片的intent
+    //
+    //
+    //        // 注意一定要添加该项权限，否则会提示无法裁剪
+    //        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    //        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+    //
+    //        intent.setDataAndType(uri, "image/*");
+    //        intent.putExtra("scale", true);
+    //
+    //        // 设置裁剪区域的宽高比例
+    //        intent.putExtra("aspectX", 1);
+    //        intent.putExtra("aspectY", 1);
+    //
+    //        // 设置裁剪区域的宽度和高度
+    //        intent.putExtra("outputX", 200);
+    //        intent.putExtra("outputY", 200);
+    //
+    //        // 取消人脸识别
+    //        intent.putExtra("noFaceDetection", true);
+    //        // 图片输出格式
+    //        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+    //
+    //        // 若为false则表示不返回数据
+    //        intent.putExtra("return-data", false);
+    //
+    //        // 指定裁剪完成以后的图片所保存的位置,pic info显示有延时
+    //        if (fromCapture) {
+    //            // 如果是使用拍照，那么原先的uri和最终目标的uri一致,注意这里的uri必须是Uri.fromFile生成的
+    //            mCutUri = Uri.fromFile(imgFile);
+    //        } else { // 从相册中选择，那么裁剪的图片保存在take_photo中
+    //            String time = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA).format(new Date ());
+    //            String fileName = "photo_"+time;
+    //            File mCutFile = new File(Environment.getExternalStorageDirectory() + "/take_photo", fileName + ".jpeg");
+    //            if (!mCutFile.getParentFile().exists()) {
+    //                mCutFile.getParentFile().mkdirs();
+    //            }
+    //            mCutUri = Uri.fromFile(mCutFile);
+    //        }
+    //        intent.putExtra(MediaStore.EXTRA_OUTPUT, mCutUri);
+    //        Toast.makeText(this, "剪裁图片", Toast.LENGTH_SHORT).show();
+    //        // 以广播方式刷新系统相册，以便能够在相册中找到刚刚所拍摄和裁剪的照片
+    //        Intent intentBc = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+    //        intentBc.setData(uri);
+    //        this.sendBroadcast(intentBc);
+    //
+    //        startActivityForResult(intent, REQUEST_CROP); //设置裁剪参数显示图片至ImageVie
+    //    }
 
 }
