@@ -207,7 +207,7 @@ class ChangeHeadIconActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, @Nullable data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK){
+        if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 RC_CHOOSE_PHOTO -> {
                     //                val uri = data!!.data
@@ -382,5 +382,23 @@ class ChangeHeadIconActivity : AppCompatActivity() {
     //
     //        startActivityForResult(intent, REQUEST_CROP); //设置裁剪参数显示图片至ImageVie
     //    }
+
+
+    //将图片转换为数组
+    fun getImageBytes(bmp: Bitmap): ByteArray {
+        if (bmp == null) {
+            return ByteArray(0)
+        }
+        var baos: ByteArrayOutputStream = ByteArrayOutputStream()
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        var imageBytes: ByteArray = baos.toByteArray()
+        return imageBytes
+
+
+    }
+
+
+
+
 
 }
