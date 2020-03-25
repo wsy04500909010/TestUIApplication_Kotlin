@@ -177,4 +177,8 @@
     <dimen name="size_tv_signup_title">16.0sp</dimen>
     <dimen name="size_tv_signup_tip">12.0sp</dimen>
     <dimen name="size_tv_signup_skip">14.0sp</dimen>
+
+    <!--    common-->
+    <dimen name="title_common_height_20">44dp</dimen>
+    <dimen name="title_common_text_size_20">16sp</dimen>
 </resources>

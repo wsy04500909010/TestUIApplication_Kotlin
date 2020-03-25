@@ -421,4 +421,10 @@
     <string name="watch_now">立即观看</string>
     <string name="watch_first">看看再说</string>
 
+
+    <!--    headicon-->
+    <string name="my_head_icon">我的头像</string>
+    <string name="change">更改</string>
+
+
 </resources>

@@ -3,9 +3,11 @@ package com.wsy.testuiapplication.kotlin
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -13,13 +15,15 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.support.annotation.Nullable
 import android.support.v4.content.FileProvider
-import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.wsy.testuiapplication.R
+import com.wsy.testuiapplication.util.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_change_head_icon.*
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -30,7 +34,7 @@ import java.util.*
 /**
  * Created by WSY on 2020/3/3.
  */
-class ChangeHeadIconActivity : AppCompatActivity() {
+class ChangeHeadIconActivity : Activity() {
 
     private val RC_TAKE_PHOTO = 1
     private val RC_CHOOSE_PHOTO = 2
@@ -48,9 +52,32 @@ class ChangeHeadIconActivity : AppCompatActivity() {
     private var imageUri: Uri? = null
 
 
+    private fun getStatusBarHeight(): Int {
+
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        return if (resourceId > 0) {
+            resources.getDimensionPixelSize(resourceId)
+        } else 0
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_head_icon)
+        StatusBarUtil.setStatusBarTranslucent(this, true)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT //竖屏
+        val view = View(this)
+        view.setBackgroundColor(Color.WHITE)
+        val layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight())
+        view.layoutParams = layoutParams
+        val rootView = LinearLayout(this)
+        rootView.orientation = LinearLayout.VERTICAL
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            rootView.addView(view)
+        }
+        rootView.addView(View.inflate(this, R.layout.activity_change_head_icon, null))
+
+
+        setContentView(rootView)
 
         mImage = findViewById(R.id.iv_head_icon)
         mButton = findViewById(R.id.btn_change)
@@ -396,9 +423,6 @@ class ChangeHeadIconActivity : AppCompatActivity() {
 
 
     }
-
-
-
 
 
 }

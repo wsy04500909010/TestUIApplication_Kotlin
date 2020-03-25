@@ -64,5 +64,7 @@
 
     <color name="color_signuptip">#FF465C</color>
 
+    <color name="color_000000">#000000</color>
+
 
 </resources>
