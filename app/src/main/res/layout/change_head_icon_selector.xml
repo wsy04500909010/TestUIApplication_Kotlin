@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_take_photo"
+        android:layout_width="331dp"
+        android:layout_height="52dp"
+        android:background="@drawable/head_icon_button_selector_up_round">
+
+        <TextView
+            android:id="@+id/tv_take_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/take_photo"
+            android:textColor="@color/black"
+            android:textSize="@dimen/my_head_menu_text_size" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="331dp"
+        android:layout_height="1dp"
+        android:background="@color/black" />
+
+    <RelativeLayout
+        android:id="@+id/rl_gallery"
+        android:layout_width="331dp"
+        android:layout_height="52dp"
+        android:background="@drawable/head_icon_button_selector_down_round">
+
+        <TextView
+            android:id="@+id/tv_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/check_from_gallery"
+            android:textColor="@color/black"
+            android:textSize="@dimen/my_head_menu_text_size" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_cancel"
+        android:layout_width="331dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="27dp"
+        android:background="@drawable/head_icon_button_selector_all_round">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/cancel_change"
+            android:textColor="@color/black"
+            android:textSize="@dimen/my_head_menu_text_size" />
+    </RelativeLayout>
+
+</LinearLayout>

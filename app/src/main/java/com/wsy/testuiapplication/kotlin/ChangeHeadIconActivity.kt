@@ -3,7 +3,6 @@ package com.wsy.testuiapplication.kotlin
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -15,16 +14,14 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.support.annotation.Nullable
 import android.support.v4.content.FileProvider
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.wsy.testuiapplication.R
 import com.wsy.testuiapplication.util.StatusBarUtil
-import kotlinx.android.synthetic.main.activity_change_head_icon.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
@@ -40,9 +37,16 @@ class ChangeHeadIconActivity : Activity() {
     private val RC_CHOOSE_PHOTO = 2
     private val REQUEST_CROP = 3
 
-    private var mImage: ImageView? = null
-    private var mButton: Button? = null
-    private var mButtonGallery: Button? = null
+    private var mTvChange: TextView? = null
+    private var mIvBack: ImageView? = null
+    private var mRlTakePhoto: RelativeLayout? = null
+    private var mRlGallery: RelativeLayout? = null
+    private var mRlCancel: RelativeLayout? = null
+
+    private var mPopupWindow: PopupWindow? = null
+
+
+    private var mHeadImage: ImageView? = null
 
     private var mTempPhotoPath: String? = null
 
@@ -62,52 +66,89 @@ class ChangeHeadIconActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        StatusBarUtil.setStatusBarTranslucent(this, true)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT //竖屏
-        val view = View(this)
-        view.setBackgroundColor(Color.WHITE)
-        val layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                getStatusBarHeight())
-        view.layoutParams = layoutParams
-        val rootView = LinearLayout(this)
-        rootView.orientation = LinearLayout.VERTICAL
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            rootView.addView(view)
-        }
-        rootView.addView(View.inflate(this, R.layout.activity_change_head_icon, null))
+        StatusBarUtil.setStatusBarColor(this, Color.BLACK)
+        //        StatusBarUtil.setStatusBarTranslucent(this, true)
+        //        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT //竖屏
+        //        val view = View(this)
+        //        view.setBackgroundColor(Color.WHITE)
+        //        val layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        //                getStatusBarHeight())
+        //        view.layoutParams = layoutParams
+        //        val rootView = LinearLayout(this)
+        //        rootView.orientation = LinearLayout.VERTICAL
+        //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        //            rootView.addView(view)
+        //        }
+        //        rootView.addView(View.inflate(this, R.layout.activity_change_head_icon, null))
+        //
+        //
+        //        setContentView(rootView)
+        setContentView(R.layout.activity_change_head_icon)
 
 
-        setContentView(rootView)
-
-        mImage = findViewById(R.id.iv_head_icon)
-        mButton = findViewById(R.id.btn_change)
-        mButtonGallery = findViewById(R.id.btn_gallery)
 
         initView()
     }
 
     fun initView() {
-        mButton?.setOnClickListener(object : View.OnClickListener {
+        initPopupWindow()
+
+        mHeadImage = findViewById(R.id.iv_head_icon)
+
+        mTvChange = findViewById(R.id.tv_change_head_icon)
+
+        mTvChange?.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                showPopupWindow()
+            }
+
+        })
+
+    }
+
+    private fun initPopupWindow() {
+        var contextView: View = LayoutInflater.from(this).inflate(R.layout.change_head_icon_selector, null)
+        mPopupWindow = PopupWindow(contextView, ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, true)
+
+        mRlTakePhoto = contextView.findViewById(R.id.rl_take_photo)
+        mRlGallery = contextView.findViewById(R.id.rl_gallery)
+        mRlCancel = contextView.findViewById(R.id.rl_cancel)
+
+        mRlTakePhoto?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 if (hasPermission()) {
                     takePhoto()
+                    mPopupWindow?.dismiss()
                 } else {
                     requestPermission()
                 }
             }
         })
-
-        mButtonGallery?.setOnClickListener(object : View.OnClickListener {
+        mRlGallery?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 if (hasPermission()) {
                     choosePhoto()
+                    mPopupWindow?.dismiss()
                 } else {
                     requestPermission()
                 }
             }
         })
+        mRlCancel?.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                mPopupWindow?.dismiss()
+            }
+        })
+
     }
 
+    private fun showPopupWindow() {
+        var rootview: View = LayoutInflater.from(this).inflate(R.layout.activity_change_head_icon, null)
+
+        mPopupWindow?.setAnimationStyle(R.style.pop_animation);
+        mPopupWindow?.showAtLocation(rootview, Gravity.BOTTOM, 0, 0)
+    }
 
     /*
     * 判断是否有权限
@@ -140,13 +181,20 @@ class ChangeHeadIconActivity : Activity() {
      * 权限申请结果回调
      */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            RC_TAKE_PHOTO   //拍照权限申请返回
-            -> if (grantResults.size == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                takePhoto()
+        if (grantResults.size == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            when (requestCode) {
+                RC_TAKE_PHOTO   //拍照权限申请返回
+                -> {
+                    takePhoto()
+                    mPopupWindow?.dismiss()
+                }
+                RC_CHOOSE_PHOTO   //相册选择照片权限申请返回
+                -> {
+                    choosePhoto()
+                    mPopupWindow?.dismiss()
+                }
+
             }
-            RC_CHOOSE_PHOTO   //相册选择照片权限申请返回
-            -> choosePhoto()
         }
     }
 
@@ -291,7 +339,7 @@ class ChangeHeadIconActivity : Activity() {
                     var bytes: ByteArray = baos.toByteArray()
                     //                byte[] bytes = baos . toByteArray ();
 
-                    Glide.with(this).load(bytes).into(iv_head_icon);
+                    Glide.with(this).load(bytes).into(mHeadImage);
 
                     //                Glide.with(this).load(bitmap).into(iv_head_icon)
 
