@@ -18,6 +18,14 @@ import java.io.File;
  */
 public class ImageUploadManager {
 
+    private static class InstanceHolder {
+        private static ImageUploadManager sInstance = new ImageUploadManager();
+    }
+
+    public static ImageUploadManager getInstance() {
+        return InstanceHolder.sInstance;
+    }
+
     private static final String TAG = "ImageUploadManager";
 
     public static final String AUTH_KEY = "cbd1DilQ7OT_ZFDgzAiRZTSQiyo51a6J";
@@ -52,7 +60,6 @@ public class ImageUploadManager {
         Volley.newRequestQueue(context).add(
                 new MultipartRequest(Request.Method.POST, url, MessageBean.class, null, mimeType, multipartBody,
                         listener));
-
     }
 
     private static Listener listener = new Listener() {
@@ -67,9 +74,7 @@ public class ImageUploadManager {
         }
     };
 
-
     public static byte[] getImageBytes(Bitmap bmp) {
-
         if (bmp == null) {
             return null;
         }
@@ -77,9 +82,7 @@ public class ImageUploadManager {
         bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         return imageBytes;
-
     }
-
 
     public interface Listener {
         /**
@@ -96,5 +99,4 @@ public class ImageUploadManager {
          */
         void onFail(Object error);
     }
-
 }
