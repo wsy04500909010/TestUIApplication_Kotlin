@@ -132,7 +132,7 @@ class ChangeHeadIconActivity : Activity() {
                     takePhoto()
                     mPopupWindow?.dismiss()
                 } else {
-                    requestPermission()
+                    requestPermission(RC_TAKE_PHOTO)
                 }
             }
         })
@@ -142,7 +142,7 @@ class ChangeHeadIconActivity : Activity() {
                     choosePhoto()
                     mPopupWindow?.dismiss()
                 } else {
-                    requestPermission()
+                    requestPermission(RC_CHOOSE_PHOTO)
                 }
             }
         })
@@ -177,13 +177,13 @@ class ChangeHeadIconActivity : Activity() {
     /**
      * 请求权限
      */
-    fun requestPermission() {
+    fun requestPermission(requestCode: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) != true) {
                 Toast.makeText(this, "请在设置中配置授权", Toast.LENGTH_SHORT).show();
             }
             var permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-            requestPermissions(permissions, 1);
+            requestPermissions(permissions, requestCode);
         }
     }
 
