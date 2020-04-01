@@ -1,6 +1,7 @@
 package com.wsy.testuiapplication.net;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -19,19 +20,23 @@ public class MultipartRequest extends Request {
     private final Gson mGson = new Gson();
     private final Class mClazz;
     private final String TAG = "MultipartRequest";
-    private final String mBoundary = "boundary-test";
+
     private static final String LINE_END = "\r\n";
 
     private final ImageUploadManager.Listener mListener;
 
-    private final Map mHeaders;
+    private Map mHeaders;
 
     private final String mMimeType;
+    private final String mBoundary;
 
     private final byte[] mMultipartBody;
+    private final String mFileName;
 
-    public MultipartRequest(int method, String url, Class clazz, Map headers, String mimeType, byte[] multipartBody,
-                            ImageUploadManager.Listener listener) {
+    private final int mTimeoutMs = 20000;
+
+    public MultipartRequest(int method, String url, Class clazz, Map headers, String mimeType, String boundary,
+                            byte[] multipartBody, String fileName, ImageUploadManager.Listener listener) {
 
         super(method, url, createErrorListener(listener));
 
@@ -39,19 +44,20 @@ public class MultipartRequest extends Request {
         this.mHeaders = headers;
         this.mListener = listener;
         this.mMimeType = mimeType;
+        this.mBoundary = boundary;
         this.mMultipartBody = multipartBody;
-
+        this.mFileName = fileName;
+        setRetryPolicy(new DefaultRetryPolicy(mTimeoutMs, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 
     @Override
     public Map getHeaders() throws AuthFailureError {
         return (mHeaders != null) ? mHeaders : super.getHeaders();
-
     }
 
     @Override
     public String getBodyContentType() {
-        return mMimeType;
+        return mMimeType;//包含boundary
     }
 
     @Override
@@ -113,13 +119,15 @@ public class MultipartRequest extends Request {
 //        if (mDataParts == null) {
 //            return;
 //        }
-        DFDataPart part = new DFDataPart("avatar", "icons.png", mMimeType, mMultipartBody);
+        DFDataPart part = new DFDataPart("avatar", mFileName, mMimeType, mMultipartBody);
+//        DFDataPart part = new DFDataPart("avatar", "icon1.png", mMimeType, mMultipartBody);
 //        for (DFDataPart part : mDataParts) {
         dos.writeBytes("--" + mBoundary + LINE_END);
         dos.writeBytes(
                 "Content-Disposition: form-data; name=\"" + part.name + "\"; " + "filename=\"" + part.filename + "\"" +
                 LINE_END);
-        dos.writeBytes("Content-Type: " + part.mimeType + LINE_END);
+        dos.writeBytes("Content-Type: " + "image/jpeg" + LINE_END);
+//        dos.writeBytes("Content-Type: " + part.mimeType + LINE_END);
         dos.writeBytes(LINE_END);
         dos.write(part.data);
         dos.writeBytes(LINE_END);

@@ -27,26 +27,25 @@ public class ImageUploadManager {
     }
 
     private static final String TAG = "ImageUploadManager";
-
-    public static final String AUTH_KEY = "cbd1DilQ7OT_ZFDgzAiRZTSQiyo51a6J";
-
     //设置请求的内容类型
-
-    private static final String boundary = "boundary-test";
-    private static final String mimeType = "multipart/form-data;boundary=" + boundary;
+    private static final String boundary = "------" + System.currentTimeMillis();
+    private static final String mimeType = "multipart/form-data; boundary=" + boundary;
 
     //保存内容的数组集合
     private static byte[] multipartBody;
 
     //需要上传的图片
     private static Bitmap bitmap;
+    private static String fileName = "jpgtest.jpeg";
 
     //通过MultipartRequest上传图片的方法
     public static void uploadAvatarByMultipart(Context context) {
 
         //根据图片的路径，将其转换为bitmap类型
+//        File file = new File(Environment.getDataDirectory() + File.separator + "data" + File.separator +
+//                             "com.wsy.testuiapplication" + File.separator + "files" + File.separator + "icon1.png");
         File file = new File(Environment.getDataDirectory() + File.separator + "data" + File.separator +
-                             "com.wsy.testuiapplication" + File.separator + "files" + File.separator + "icons.png");
+                             "com.wsy.testuiapplication" + File.separator + "files" + File.separator + fileName);
         String path = file.getAbsolutePath();
         bitmap = BitmapFactory.decodeFile(path);
         //调用图片转数组的方法，获得图片的数组数据
@@ -58,19 +57,19 @@ public class ImageUploadManager {
         //执行MultipartRequest请求，设置上传的内容和内容类型，executeRequest会将请求添加到请求队列中。
 
         Volley.newRequestQueue(context).add(
-                new MultipartRequest(Request.Method.POST, url, MessageBean.class, null, mimeType, multipartBody,
-                        listener));
+                new MultipartRequest(Request.Method.POST, url, MessageBean.class, null, mimeType, boundary,
+                        multipartBody, fileName, listener));
     }
 
     private static Listener listener = new Listener() {
         @Override
         public void onSuccess(Object response) {
-            Slog.d(TAG, response.toString());
+            Slog.d(TAG, "success\n" + response.toString());
         }
 
         @Override
         public void onFail(Object error) {
-            Slog.d(TAG, error.toString());
+            Slog.d(TAG, "failed\n" + error.toString());
         }
     };
 
@@ -79,7 +78,8 @@ public class ImageUploadManager {
             return null;
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//        bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         return imageBytes;
     }
