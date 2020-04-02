@@ -102,7 +102,6 @@
         android:id="@+id/group_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         app:constraint_referenced_ids="progress_bg,pb_upload,tv_uploading" />
 
 </android.support.constraint.ConstraintLayout>
