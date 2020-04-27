@@ -62,8 +62,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_signin_activity"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tv_signin_activity" />
 
     <View
         android:id="@+id/progress_bg"
@@ -73,8 +72,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </View>
+        app:layout_constraintTop_toTopOf="parent"></View>
 
     <ProgressBar
         android:id="@+id/pb_upload"
@@ -102,6 +100,17 @@
         android:id="@+id/group_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:constraint_referenced_ids="progress_bg,pb_upload,tv_uploading" />
 
+
+    <ImageView
+        android:id="@+id/iv_head_icon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,1:1"
+        android:layout_marginTop="140dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

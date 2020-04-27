@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -83,9 +84,8 @@ class ChangeHeadIconActivity : Activity() {
         //        setContentView(rootView)
         setContentView(R.layout.activity_change_head_icon)
 
-
-
         initView()
+        initData()
     }
 
     fun initView() {
@@ -106,6 +106,19 @@ class ChangeHeadIconActivity : Activity() {
             }
         })
 
+    }
+
+    fun initData() {
+        if (intent != null) {
+            var extras: Bundle = getIntent().getExtras()
+            if (extras != null) {
+                var b: ByteArray = extras.getByteArray("picture")
+                if (b != null) {
+                    var bmp: Bitmap = BitmapFactory.decodeByteArray(b, 0, b.size)
+                    mHeadImage?.setImageDrawable(BitmapDrawable(bmp))
+                }
+            }
+        }
     }
 
     private fun initPopupWindow() {
