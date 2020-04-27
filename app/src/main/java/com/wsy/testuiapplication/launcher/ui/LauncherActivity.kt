@@ -6,15 +6,24 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.constraint.Group
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.wsy.testuiapplication.DFRoundTextView
 import com.wsy.testuiapplication.R
 import com.wsy.testuiapplication.kotlin.ChangeHeadIconActivity
 import com.wsy.testuiapplication.net.ImageUploadManager
+import com.wsy.testuiapplication.util.Slog
 import java.io.ByteArrayOutputStream
 
 
@@ -29,12 +38,27 @@ class LauncherActivity : Activity() {
 
     var mIvHeadIcon: ImageView? = null
 
+    var mBtnGoogle: Button? = null
+
     private var mProgressBar: ProgressBar? = null
+
+    // google
+    private var mGoogleSignInClient: GoogleSignInClient? = null
+    private val RC_SIGN_IN = 9001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_launcher)
+        // google
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail()
+                .requestIdToken(getString(R.string.server_client_id)).build()
+        //
+        //        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
 
         mBtn1 = findViewById(R.id.tv_watch_now)
         mBtn2 = findViewById(R.id.tv_signin_activity)
@@ -78,9 +102,9 @@ class LauncherActivity : Activity() {
                 .asBitmap().skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE).dontAnimate().placeholder(0).into(
                         mIvHeadIcon)
-//        Glide.with(this)
-//                .load("http://192.168.8.211:8082/v1/video/avatars?consumer_email=tvsc01@tvtest.com&auth_key=cbd1DilQ7OT_ZFDgzAiRZTSQiyo51a6J")
-//                .asBitmap().into(mIvHeadIcon)
+        //        Glide.with(this)
+        //                .load("http://192.168.8.211:8082/v1/video/avatars?consumer_email=tvsc01@tvtest.com&auth_key=cbd1DilQ7OT_ZFDgzAiRZTSQiyo51a6J")
+        //                .asBitmap().into(mIvHeadIcon)
         mIvHeadIcon?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
 
@@ -98,6 +122,15 @@ class LauncherActivity : Activity() {
             }
         })
 
+        mBtnGoogle = findViewById(R.id.btn_google_signin)
+        mBtnGoogle?.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                val signInIntent = mGoogleSignInClient?.getSignInIntent()
+                startActivityForResult(signInIntent, RC_SIGN_IN)
+            }
+
+        })
+
     }
 
     override fun onBackPressed() {
@@ -108,5 +141,33 @@ class LauncherActivity : Activity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            RC_SIGN_IN -> {
+                // The Task returned from this call is always completed, no need to attach
+                // a listener.
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                handleSignInResult(task)
+            }
+
+        }
+    }
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+
+            Slog.d("handleSignInResult", "account")
+            // Signed in successfully, show authenticated UI.
+            //            updateUI(account);
+        } catch (e: ApiException) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("handleSignInResult", "signInResult:failed code=" + e.statusCode)
+            //            updateUI(null);
+        }
+
+    }
 
 }

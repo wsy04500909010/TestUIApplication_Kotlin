@@ -300,7 +300,7 @@
     <string name="st_clear_total_cache">缓存已清除</string>
     <string name="user_privacy_protocal">用户隐私权政策</string>
     <string name="user_current_versionCode">iTalkBB&#160;&#160;</string>
-    <string name="facebook_app_id">2306834906239538</string>
+<!--    <string name="facebook_app_id">2306834906239538</string>-->
 
     <!-- TODO: Remove or change this placeholder text -->
     <!--user-->
@@ -430,5 +430,11 @@
     <string name="cancel_change">取消</string>
     <string name="uploading">正在上传</string>
 
+
+    <string name="facebook_app_id">[APP_ID]</string>
+    <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
+
+<!--    google-->
+    <string name="server_client_id">859259899999-o9ijk3infscb79pgbkk9p7prhe4g4snf.apps.googleusercontent.com</string>
 
 </resources>
