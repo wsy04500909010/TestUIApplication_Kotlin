@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="200px" />
 
-
     <com.wsy.testuiapplication.view.CustomSwitchButton
         android:id="@+id/switchbutton"
         android:layout_width="250dp"

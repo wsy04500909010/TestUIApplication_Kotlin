@@ -15,10 +15,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.wsy.testuiapplication.bean.GenObject;
 import com.wsy.testuiapplication.util.Slog;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,14 +35,41 @@ public class MainActivity extends AppCompatActivity {
     private TextView mVersion;
     private DFRoundTextView mKotlinBtn;
 
+
+    private GenObject<Integer> genObject;
+    private List<String> dataList = new ArrayList<>();
+    private Class clazz;
+
+
     private Timer timer;
     private int count;
 
+
+    private void getType() {
+
+        Field stringListField = null;
+        try {
+            stringListField = MainActivity.class.getDeclaredField("dataList");
+            ParameterizedType stringListType = (ParameterizedType) stringListField.getGenericType();
+            Class<?> stringListClass = (Class<?>) stringListType.getActualTypeArguments()[0];
+            Log.d(TAG, stringListClass.getName());
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+        // GenObject 不是一个指定了具体泛型的泛型类的子类 如  GenObject extend Gen<Integer> 所以这样拿不到
+//        ParameterizedType type = (ParameterizedType) genObject.getClass().getGenericSuperclass();
+//        clazz = (Class) type.getActualTypeArguments()[0];
+//        Log.d(TAG, clazz.getName());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        genObject = new GenObject<>();
+        getType();
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -106,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                startActivity(new Intent(MainActivity.this,MediaPlayerActivity.class));
-                startActivity(new Intent(MainActivity.this, TVBAdActivity.class));
-//                startActivity(new Intent(MainActivity.this,CustomViewActivity.class));
+//                startActivity(new Intent(MainActivity.this, TVBAdActivity.class));
+                startActivity(new Intent(MainActivity.this,CustomViewActivity.class));
             }
         });
 
@@ -119,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         mKotlinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,KotlinMainActivity.class));
+                startActivity(new Intent(MainActivity.this, KotlinMainActivity.class));
             }
         });
 
@@ -174,9 +205,8 @@ public class MainActivity extends AppCompatActivity {
     public static int getLocalVersion(Context ctx) {
         int localVersion = 0;
         try {
-            PackageInfo packageInfo = ctx.getApplicationContext()
-                    .getPackageManager()
-                    .getPackageInfo(ctx.getPackageName(), 0);
+            PackageInfo packageInfo = ctx.getApplicationContext().getPackageManager().getPackageInfo(
+                    ctx.getPackageName(), 0);
             localVersion = packageInfo.versionCode;
             Log.d("TAG", "本软件的版本号。。" + localVersion);
         } catch (PackageManager.NameNotFoundException e) {
