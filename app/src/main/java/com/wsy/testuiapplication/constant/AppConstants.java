@@ -59,5 +59,12 @@ public class AppConstants {
     //add playhistory success
     public static final String ADD_PLAYHISTORY_SUCCESS = "action.add_playhistory_success";
 
+    // 三种语言常量标记
+
+    public static final String LANGUAGE = "language";
+
+    public static final int LANGUAGE_ZH = 0;
+    public static final int LANGUAGE_EN = 1;
+    public static final int LANGUAGE_DEFAULT = 2;
 
 }

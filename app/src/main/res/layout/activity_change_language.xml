@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/v_line_title"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/title_common_height_20"
+        android:background="@color/color_666666_30percent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back_change_language"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/icon_backarrow_black"
+        app:layout_constraintBottom_toBottomOf="@id/v_line_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="@string/change_language"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/title_common_text_size_20"
+        app:layout_constraintBottom_toBottomOf="@id/back_change_language"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back_change_language" />
+
+    <View
+        android:id="@+id/v_line_zh"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="48dp"
+        android:background="@color/color_666666_30percent"
+        app:layout_constraintTop_toBottomOf="@id/v_line_title" />
+
+    <TextView
+        android:id="@+id/tv_language_zh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="@string/language_zh"
+        android:textColor="@color/color_000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/v_line_zh"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/v_line_title" />
+
+    <View
+        android:id="@+id/v_line_en"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="48dp"
+        android:background="@color/color_666666_30percent"
+        app:layout_constraintTop_toBottomOf="@id/v_line_zh" />
+
+
+    <TextView
+        android:id="@+id/tv_language_en"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/language_en"
+        android:textColor="@color/color_000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/v_line_en"
+        app:layout_constraintStart_toStartOf="@id/tv_language_zh"
+        app:layout_constraintTop_toTopOf="@id/v_line_zh" />
+
+    <View
+        android:id="@+id/v_line_default"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="48dp"
+        android:background="@color/color_666666_30percent"
+        app:layout_constraintTop_toBottomOf="@id/v_line_en" />
+
+    <TextView
+        android:id="@+id/tv_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_clear_cache"
+        android:textColor="@color/color_000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/v_line_default"
+        app:layout_constraintStart_toStartOf="@id/tv_language_en"
+        app:layout_constraintTop_toTopOf="@id/v_line_en" />
+
+    <!--    点击响应区域-->
+    <View
+        android:id="@+id/v_zh"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ripple_background_selector"
+        app:layout_constraintBottom_toBottomOf="@id/v_line_zh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/v_line_title" />
+
+    <View
+        android:id="@+id/v_en"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ripple_background_selector"
+        app:layout_constraintBottom_toBottomOf="@id/v_line_en"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/v_line_zh" />
+
+    <View
+        android:id="@+id/v_default"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ripple_background_selector"
+        app:layout_constraintBottom_toBottomOf="@id/v_line_default"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/v_line_en" />
+
+</android.support.constraint.ConstraintLayout>

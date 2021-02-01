@@ -3,7 +3,7 @@
 
     <string name="copyright">Copyright © iTalkBB.com All rights reserved</string>
     <string name="tip_login1">iTalkBB 任意产品用户可使用原账号密码直接登录</string>
-    <string name="tip_login2">您也可以使用常用邮箱注册新账户，获取个性化内容推荐。每个账户只支持同时使用一个用户端进行观看。</string>
+    <string name="tip_login2">You can also sign up for a new account with a common email to get personalized content recommendation. Each account can only use one client to watch at the same time.</string>
     <string name="tip_signup1">继续代表已同意</string>
     <string name="tip_signup2">《iTalkBB 服务条款》</string>
     <string name="login_forgetpsd">忘记密码</string>

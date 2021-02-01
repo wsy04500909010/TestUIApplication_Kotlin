@@ -68,5 +68,6 @@
     <color name="color_1A000000">#1A000000</color>
     <color name="color_B3000000">#B3000000</color>
 
-
+    <color name="color_666666_30percent">#4C666666</color>
+    <color name="color_22999999">#22999999</color>
 </resources>
