@@ -1,8 +1,6 @@
 package com.wsy.testuiapplication
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
@@ -68,13 +66,19 @@ class ChangeLanguageActivity : AppCompatActivity(), View.OnClickListener {
 
 
         Handler().postDelayed(Runnable {
-            var intent = getBaseContext().getPackageManager()
-                    .getLaunchIntentForPackage(getBaseContext().getPackageName());
-            var restartIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
-            var mgr = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, restartIntent);
-//            System.exit(0) //这种方式也可以
-            android.os.Process.killProcess(android.os.Process.myPid());
+//            var intent = getBaseContext().getPackageManager()
+//                    .getLaunchIntentForPackage(getBaseContext().getPackageName());
+//            var restartIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
+//            var mgr = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, restartIntent);
+////            System.exit(0) //这种方式也可以
+//            android.os.Process.killProcess(android.os.Process.myPid());
+
+            // 实际工作项目测试上面方法 只会重启后回到ChangeLanguageActivity页面 改为下面这种
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            System.exit(0)
         }, 2000)
 
     }
